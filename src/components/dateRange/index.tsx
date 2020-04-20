@@ -8,7 +8,7 @@ export default function DateRange() {
 
   return (
     <React.Fragment>
-      <Button onClick={toggleOpenModal}>Show Dates</Button>
+      <Button onClick={toggleOpenModal}>Select Dates</Button>
       {/* TODO: clarify modal */}
       <Modal
         isOpen={openModal}

@@ -27,6 +27,14 @@ const RenderIf: FunctionComponent<{ isTrue: boolean }> = (props) => {
   return <React.Fragment>{props.isTrue && props.children}</React.Fragment>;
 };
 
+const theme = {
+  rainbow: {
+    palette: {
+      brand: "#5c56b6",
+    },
+  },
+};
+
 export const Home: FunctionComponent = (props) => {
   const history = useHistory();
   const [selectedItem, setSelectedItem] = useState(
@@ -51,7 +59,7 @@ export const Home: FunctionComponent = (props) => {
   const handleOnSelect = (e: any, item: string) => setSelectedItem(item);
 
   return (
-    <Application>
+    <Application theme={theme}>
       <RenderIf isTrue={!isSidebarHidden}>
         <div
           className='react-rainbow-admin-app_backdrop'
