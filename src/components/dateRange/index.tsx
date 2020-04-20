@@ -25,6 +25,7 @@ export default function DateRange() {
           </div>
         }
       >
+        <br />
         <div className='rainbow-flex rainbow-justify_spread'>
           <Range />
         </div>

@@ -1,13 +1,14 @@
 import React from "react";
-import PropTypes from "prop-types";
-import ButtonGroup from "react-rainbow-components/components/ButtonGroup";
-import ButtonIcon from "react-rainbow-components/components/ButtonIcon";
-import AvatarMenu from "react-rainbow-components/components/AvatarMenu";
-import Avatar from "react-rainbow-components/components/Avatar";
-import Input from "react-rainbow-components/components/Input";
-import MenuItem from "react-rainbow-components/components/MenuItem";
-import MenuDivider from "react-rainbow-components/components/MenuDivider";
-import ButtonMenu from "react-rainbow-components/components/ButtonMenu";
+import {
+  ButtonGroup,
+  ButtonIcon,
+  AvatarMenu,
+  Avatar,
+  Input,
+  MenuItem,
+  MenuDivider,
+  ButtonMenu,
+} from "react-rainbow-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faRocket,
@@ -21,7 +22,7 @@ import { faBell } from "@fortawesome/free-regular-svg-icons";
 import { ShoppingCartIcon, MessageIcon, BarsIcon, GithubIcon } from "../icons";
 import Notification from "./notification";
 import IconNotification from "./iconNotification";
-import "./styles.css";
+import { Link } from "react-router-dom";
 
 interface SectionHeadingProps {
   onToogleSidebar: () => void;
@@ -30,11 +31,13 @@ interface SectionHeadingProps {
 export default function SectionHeading(props: SectionHeadingProps) {
   return (
     <header className='react-rainbow-admin_header rainbow-position_fixed rainbow-flex rainbow-align_center rainbow-p-horizontal_large rainbow-background-color_white'>
-      <img
-        src='/assets/images/profit_logo.png'
-        alt='rainbow logo'
-        className='react-rainbow-admin_header-logo'
-      />
+      <Link to='/'>
+        <img
+          src='/assets/images/profit_logo.png'
+          alt='rainbow logo'
+          className='react-rainbow-admin_header-logo'
+        />
+      </Link>
       <Input
         className='rainbow-m-left_xx-large react-rainbow-admin_header-search'
         placeholder='search'
@@ -146,11 +149,3 @@ export default function SectionHeading(props: SectionHeadingProps) {
     </header>
   );
 }
-
-SectionHeading.propTypes = {
-  onToogleSidebar: PropTypes.func,
-};
-
-SectionHeading.defaultProps = {
-  onToogleSidebar: () => {},
-};

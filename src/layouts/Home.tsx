@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import SectionHeading from "../components/SectionHeading";
 import {
-  // ApplicationIcon,
+  ApplicationIcon,
   // ChartsIcon,
   DashboardIcon,
   // FormsIcon,
@@ -20,7 +20,7 @@ import { useHistory } from "react-router-dom";
 import "./styles.css";
 
 function resolveCurrentUrl(pathname: string) {
-  return pathname.split("/")[1] || "dashboard";
+  return pathname.split("/")[1] || "none";
 }
 
 const RenderIf: FunctionComponent<{ isTrue: boolean }> = (props) => {
@@ -72,6 +72,13 @@ export const Home: FunctionComponent = (props) => {
             name='dashboard'
             label='Dashboard'
             onClick={() => history.push("/dashboard")}
+          />
+          <SidebarItem
+            className='react-rainbow-admin-app_sidebar-item'
+            icon={<ApplicationIcon />}
+            name='payments'
+            label='Payments'
+            onClick={() => history.push("/payments")}
           />
         </Sidebar>
         <RenderIf isTrue={!isSidebarHidden}>
