@@ -1,34 +1,50 @@
 import React from "react";
 import {
-  ButtonGroup,
+  // ButtonGroup,
   ButtonIcon,
   AvatarMenu,
   Avatar,
-  Input,
+  // Input,
   MenuItem,
   MenuDivider,
   ButtonMenu,
 } from "react-rainbow-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faRocket,
-  faAngleDown,
-  faBullhorn,
-  faSearch,
-  faPencilAlt,
+  // faRocket,
+  // faAngleDown,
+  // faBullhorn,
+  // faSearch,
+  // faPencilAlt,
   faPowerOff,
 } from "@fortawesome/free-solid-svg-icons";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
-import { ShoppingCartIcon, MessageIcon, BarsIcon, GithubIcon } from "../icons";
+import {
+  ShoppingCartIcon,
+  MessageIcon,
+  BarsIcon,
+  // GithubIcon
+} from "../icons";
 import Notification from "./notification";
 import IconNotification from "./iconNotification";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 interface SectionHeadingProps {
   onToogleSidebar: () => void;
 }
 
 export default function SectionHeading(props: SectionHeadingProps) {
+  const email = localStorage.getItem("email") || "Unknown";
+  const name = localStorage.getItem("name") || "Unknown";
+
+  const history = useHistory();
+
+  const handleLogout = () => {
+    localStorage.removeItem("name");
+    localStorage.removeItem("email");
+    history.push("/");
+  };
+
   return (
     <header className='react-rainbow-admin_header rainbow-position_fixed rainbow-flex rainbow-align_center rainbow-p-horizontal_large rainbow-background-color_white'>
       <Link to='/'>
@@ -38,7 +54,7 @@ export default function SectionHeading(props: SectionHeadingProps) {
           className='react-rainbow-admin_header-logo'
         />
       </Link>
-      <Input
+      {/* <Input
         className='rainbow-m-left_xx-large react-rainbow-admin_header-search'
         placeholder='search'
         label='header search'
@@ -46,9 +62,9 @@ export default function SectionHeading(props: SectionHeadingProps) {
         icon={
           <FontAwesomeIcon icon={faSearch} className='rainbow-color_gray-2' />
         }
-      />
+      /> */}
       <section className='rainbow-flex rainbow-align_center react-rainbow-admin_header-actions'>
-        <ButtonGroup className='rainbow-m-right_medium'>
+        {/* <ButtonGroup className='rainbow-m-right_medium'>
           <ButtonIcon
             icon={<FontAwesomeIcon icon={faRocket} />}
             variant='border-filled'
@@ -67,14 +83,14 @@ export default function SectionHeading(props: SectionHeadingProps) {
             <MenuItem label='Admin-2' />
             <MenuItem label='Admin-3' />
           </ButtonMenu>
-        </ButtonGroup>
-        <a
+        </ButtonGroup> */}
+        {/* <a
           href='https://github.com/nexxtway/react-rainbow-admin'
           target='_blank'
           rel='noopener noreferrer'
         >
           <GithubIcon className='react-rainbow-admin_header-github-icon' />
-        </a>
+        </a> */}
         <ButtonMenu
           className='rainbow-m-horizontal_medium react-rainbow-admin_header-button-notification'
           menuAlignment='right'
@@ -105,38 +121,39 @@ export default function SectionHeading(props: SectionHeadingProps) {
           />
         </ButtonMenu>
         <AvatarMenu
-          src='/assets/images/user2.jpg'
-          assistiveText='Tahimi Leon'
+          src='/assets/images/user3.jpg'
+          assistiveText={name}
           menuAlignment='right'
           menuSize='small'
-          title='Tahimi Leon'
+          title={name}
         >
           <li className='rainbow-p-horizontal_small rainbow-align_center rainbow-flex'>
             <Avatar
-              src='/assets/images/user2.jpg'
-              assistiveText='Tahimi Leon'
-              title='Tahimi Leon'
+              src='/assets/images/user3.jpg'
+              assistiveText={name}
+              title={name}
               size='medium'
             />
             <div className='rainbow-m-left_x-small'>
               <p className='rainbow-font-size-text_medium rainbow-color_dark-1'>
-                Tahimi
+                {name}
               </p>
               <p className='rainbow-font-size-text_small rainbow-color_gray-3'>
-                janedoe@gmail.com
+                {email}
               </p>
             </div>
           </li>
           <MenuDivider variant='space' />
-          <MenuItem
+          {/* <MenuItem
             label='Edit Profile'
             icon={<FontAwesomeIcon icon={faPencilAlt} />}
             iconPosition='left'
-          />
+          /> */}
           <MenuItem
             label='Logout'
             icon={<FontAwesomeIcon icon={faPowerOff} />}
             iconPosition='left'
+            onClick={handleLogout}
           />
         </AvatarMenu>
       </section>
