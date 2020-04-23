@@ -18,7 +18,7 @@ export default function Edit() {
         }
         heading='Create Payment'
         subheading='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-        query={PAYMENT_CREATE}
+        mutation={PAYMENT_CREATE}
         redirect='/payments'
       />
     </React.Fragment>

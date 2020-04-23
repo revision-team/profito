@@ -102,3 +102,18 @@ export const PAYMENT_CREATE = gql`
     }
   }
 `;
+
+export const PAYMENT_DESTROY = gql`
+  mutation DestroyPayment($id: String!) {
+    paymentsDestroy(id: $id) {
+      amount
+      concluded
+      currency
+      description
+      end
+      frequency
+      id
+      start
+    }
+  }
+`;

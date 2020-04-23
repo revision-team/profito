@@ -3,24 +3,25 @@ import { Shopify } from "./index";
 import { Container, Section } from "components/custom";
 import PageHeader from "components/PageHeader";
 import { Input, Card, Button } from "react-rainbow-components";
+import { FormProps } from "views/payments/_form";
+import { useMutation } from "@apollo/client";
+import { useHistory } from "react-router-dom";
 
 export interface Currency {
   name: string;
   acronym: string;
 }
 
-export interface FormProps<T> {
-  data: T;
-  heading: string;
-  subheading?: string;
-}
-
 export default function Form(props: FormProps<Shopify>) {
+  const history = useHistory();
+
   const [store, setStore] = useState({ ...props.data });
+
+  const [submit] = useMutation(props.mutation);
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(store);
+    submit({ variables: store }).then(() => history.push(props.redirect));
   };
 
   return (
@@ -46,6 +47,7 @@ export default function Form(props: FormProps<Shopify>) {
                   <Input
                     label='Store'
                     name='store'
+                    required
                     className='rainbow-m-top_small rainbow-rainbow-forms_inputs-field'
                     value={store.store}
                     onChange={(e) =>
@@ -56,8 +58,9 @@ export default function Form(props: FormProps<Shopify>) {
                     }
                   />
                   <Input
-                    label='Username'
+                    label='Key'
                     name='username'
+                    required
                     className='rainbow-m-top_small rainbow-rainbow-forms_inputs-field'
                     value={store.username}
                     onChange={(e) =>
@@ -70,6 +73,7 @@ export default function Form(props: FormProps<Shopify>) {
                   <Input
                     label='Password'
                     name='password'
+                    required
                     className='rainbow-m-top_small rainbow-rainbow-forms_inputs-field'
                     type='password'
                     value={store.password}
@@ -85,6 +89,7 @@ export default function Form(props: FormProps<Shopify>) {
                   <Input
                     label='Description'
                     name='description'
+                    required
                     className='rainbow-m-top_small rainbow-rainbow-forms_inputs-field'
                     value={store.description}
                     onChange={(e) =>

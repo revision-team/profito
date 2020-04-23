@@ -18,6 +18,7 @@ import {
 } from "../components/icons";
 import { useHistory } from "react-router-dom";
 import "./styles.css";
+import ShoppingCart from "components/icons/ShoppingCart";
 
 function resolveCurrentUrl(pathname: string) {
   return pathname.split("/")[1] || "none";
@@ -87,6 +88,13 @@ export const Home: FunctionComponent = (props) => {
             name='payments'
             label='Payments'
             onClick={() => history.push("/payments")}
+          />
+          <SidebarItem
+            className='react-rainbow-admin-app_sidebar-item'
+            icon={<ShoppingCart />}
+            name='shopify'
+            label='Shopify'
+            onClick={() => history.push("/resources/shopify")}
           />
         </Sidebar>
         <RenderIf isTrue={!isSidebarHidden}>

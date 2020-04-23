@@ -76,14 +76,14 @@ export default function Register() {
                 setData({ ...data, password_confirm: e.target.value })
               }
             />
-            <Button
-              className='rainbow-m-top_medium'
-              type='submit'
-              variant='brand'
-            >
-              <span>Register</span>
-            </Button>
           </article>
+          <Button
+            className='rainbow-m-top_medium'
+            type='submit'
+            variant='brand'
+          >
+            <span>Register</span>
+          </Button>
         </form>
       </Card>
     </Centered>

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { Payment } from "./index";
 import Form from "./_form";
-import { GET_PAYMENT, PAYMENT_EDIT } from "./queries";
+import { GET_PAYMENT, PAYMENT_EDIT, PAYMENT_DESTROY } from "./queries";
 
 export interface PaymentRequest {
   payment: Payment;
@@ -24,7 +24,8 @@ export default function Edit() {
           data={data.payment}
           heading='Edit Payment'
           subheading='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-          query={PAYMENT_EDIT}
+          mutation={PAYMENT_EDIT}
+          destroy={PAYMENT_DESTROY}
           redirect='/payments'
         />
       )}

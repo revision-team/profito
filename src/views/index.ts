@@ -11,6 +11,7 @@ import PaymentsCreate from "./payments/create";
 
 import Shopifies from "./resources/shopify";
 import ShopifiesEdit from "./resources/shopify/edit";
+import ShopifiesCreate from "./resources/shopify/create";
 
 export {
   Home,
@@ -20,6 +21,7 @@ export {
   PaymentsCreate,
   Shopifies,
   ShopifiesEdit,
+  ShopifiesCreate,
   Login,
   Register,
 };

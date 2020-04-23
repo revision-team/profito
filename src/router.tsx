@@ -12,9 +12,10 @@ import {
   Register,
   Payments,
   PaymentsEdit,
+  PaymentsCreate,
   Shopifies,
   ShopifiesEdit,
-  PaymentsCreate,
+  ShopifiesCreate,
 } from "views";
 
 interface RouteParams {
@@ -52,10 +53,17 @@ function HomeComponent() {
     <HomeLayout>
       <Switch>
         <AuthRoute exact path='/dashboard' component={Dashboard} />
+
         <AuthRoute exact path='/payments' component={Payments} />
         <AuthRoute exact path='/payments/create' component={PaymentsCreate} />
         <AuthRoute exact path='/payments/:id/edit' component={PaymentsEdit} />
+
         <AuthRoute exact path='/resources/shopify' component={Shopifies} />
+        <AuthRoute
+          exact
+          path='/resources/shopify/create'
+          component={ShopifiesCreate}
+        />
         <AuthRoute
           exact
           path='/resources/shopify/:id/edit'

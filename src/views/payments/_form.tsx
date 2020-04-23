@@ -23,7 +23,8 @@ export interface FormProps<T> {
   data: T;
   heading: string;
   subheading?: string;
-  query: DocumentNode;
+  mutation: DocumentNode;
+  destroy?: DocumentNode;
   redirect: string;
 }
 
@@ -36,7 +37,13 @@ export default function Form(props: FormProps<Payment>) {
     currencies: Currency[];
   }>(GET_CURRENCIES);
 
-  const [submit] = useMutation(props.query);
+  const [submit] = useMutation(props.mutation);
+  const [destroy] = useMutation(props.destroy || props.mutation);
+
+  const destroyEvent = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.preventDefault();
+    destroy({ variables: element }).then(() => history.push(props.redirect));
+  };
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -57,13 +64,26 @@ export default function Form(props: FormProps<Payment>) {
         <form onSubmit={submitForm}>
           <Card
             footer={
-              <Button
-                className='rainbow-rainbow-forms_button'
-                variant='brand'
-                type='submit'
-              >
-                <span>Submit</span>
-              </Button>
+              <React.Fragment>
+                <Button
+                  className='rainbow-rainbow-forms_button'
+                  variant='brand'
+                  type='submit'
+                >
+                  <span>Submit</span>
+                </Button>
+                {"  "}
+                {props.destroy && (
+                  <Button
+                    className='rainbow-rainbow-forms_button'
+                    variant='destructive'
+                    type='submit'
+                    onClick={destroyEvent}
+                  >
+                    <span>Destroy</span>
+                  </Button>
+                )}
+              </React.Fragment>
             }
           >
             <Container>
@@ -125,8 +145,8 @@ export default function Form(props: FormProps<Payment>) {
                     }
                   />
                   <Select
-                    label='Select Label'
-                    disabled={!currencies}
+                    label='Currency'
+                    disabled={loadingCurrencies}
                     options={
                       currencies
                         ? currencies.currencies.map((c) => ({
