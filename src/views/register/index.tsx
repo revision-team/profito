@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { Email, Lock, User } from "components/icons";
 import { Button } from "react-rainbow-components";
-import { Centered, Card, CustomLink, Input } from "../login";
+import { Centered, Card, CustomLink, Input } from "components/custom";
 import { useHistory } from "react-router-dom";
 
 interface UserData {

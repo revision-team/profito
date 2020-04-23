@@ -1,35 +1,8 @@
 import React, { useState } from "react";
 import { Email, Lock } from "components/icons";
-import styled from "styled-components";
-import {
-  Card as Cardbow,
-  Button,
-  Input as Inputbow,
-} from "react-rainbow-components";
-import { Link, useHistory, useParams } from "react-router-dom";
-
-export const Centered = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
-
-export const Card = styled(Cardbow)`
-  width: 500px;
-  padding: 20px;
-  text-align: center;
-  flex-wrap: wrap;
-`;
-
-export const Input = styled(Inputbow)`
-  margin: 20px;
-`;
-
-export const CustomLink = styled(Link)`
-  color: #01b6f5;
-  text-decoration: none;
-`;
+import { Button } from "react-rainbow-components";
+import { useHistory, useParams } from "react-router-dom";
+import { Centered, Card, CustomLink, Input } from "components/custom";
 
 interface UserData {
   email: string;

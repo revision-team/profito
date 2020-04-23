@@ -1,39 +1,11 @@
 import React from "react";
 import DateRange from "components/dateRange";
 import PageHeader from "components/PageHeader";
-import styled from "styled-components";
 import Tile from "components/Tile";
 import { ShoppingCartIcon } from "components/icons";
-// import { Card as DefaultCard } from "react-rainbow-components";
 import InteractiveChart from "components/chart";
-const Container = styled.div`
-  padding: 16px 40px 24px 40px;
-  @media (max-width: 800px) {
-    padding: 16px 16px 24px 16px;
-  }
-`;
 
-const Section = styled.section`
-  @media (max-width: 800px) {
-    flex-direction: column;
-  }
-`;
-
-// const Card = styled(DefaultCard)`
-//   width: 100%;
-//   flex-wrap: wrap;
-// `;
-
-// const CardHead = styled.h1`
-//   font-size: 28px;
-//   line-height: 1.07;
-//   letter-spacing: 1.8px;
-// `;
-
-// const CardTitle = styled.p`
-//   letter-spacing: 0.2px;
-//   text-transform: uppercase;
-// `;
+import { Container, Section } from "components/custom";
 
 const fakeData = {
   successfulyOrders: {

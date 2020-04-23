@@ -6,7 +6,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { Home as HomeLayout } from "layouts/Home";
-import { Dashboard, Login, Register, Payments } from "views";
+import { Dashboard, Login, Register, Payments, PaymentsEdit } from "views";
 
 interface RouteParams {
   exact?: boolean;
@@ -44,6 +44,7 @@ function HomeComponent() {
       <Switch>
         <AuthRoute exact path='/dashboard' component={Dashboard} />
         <AuthRoute exact path='/payments' component={Payments} />
+        <AuthRoute exact path='/payments/:key/edit' component={PaymentsEdit} />
         <Redirect from='*' to='/dashboard' />
       </Switch>
     </HomeLayout>
