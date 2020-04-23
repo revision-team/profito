@@ -6,7 +6,15 @@ import {
   Redirect,
 } from "react-router-dom";
 import { Home as HomeLayout } from "layouts/Home";
-import { Dashboard, Login, Register, Payments, PaymentsEdit } from "views";
+import {
+  Dashboard,
+  Login,
+  Register,
+  Payments,
+  PaymentsEdit,
+  Shopifies,
+  ShopifiesEdit,
+} from "views";
 
 interface RouteParams {
   exact?: boolean;
@@ -45,6 +53,12 @@ function HomeComponent() {
         <AuthRoute exact path='/dashboard' component={Dashboard} />
         <AuthRoute exact path='/payments' component={Payments} />
         <AuthRoute exact path='/payments/:key/edit' component={PaymentsEdit} />
+        <AuthRoute exact path='/resources/shopify' component={Shopifies} />
+        <AuthRoute
+          exact
+          path='/resources/shopify/:key/edit'
+          component={ShopifiesEdit}
+        />
         <Redirect from='*' to='/dashboard' />
       </Switch>
     </HomeLayout>
