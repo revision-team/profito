@@ -28,6 +28,7 @@ import {
 import Notification from "./notification";
 import IconNotification from "./iconNotification";
 import { Link, useHistory } from "react-router-dom";
+import Cookies from "react-cookies";
 
 interface SectionHeadingProps {
   onToogleSidebar: () => void;
@@ -42,6 +43,7 @@ export default function SectionHeading(props: SectionHeadingProps) {
   const handleLogout = () => {
     localStorage.removeItem("name");
     localStorage.removeItem("email");
+    Cookies.remove("jwt");
     history.push("/");
   };
 

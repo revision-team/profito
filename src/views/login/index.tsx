@@ -71,14 +71,14 @@ export default function Login() {
               value={data.password}
               onChange={(e) => setData({ ...data, password: e.target.value })}
             />
-            <Button
-              className='rainbow-m-top_medium'
-              type='submit'
-              variant='brand'
-            >
-              <span>Login</span>
-            </Button>
           </article>
+          <Button
+            className='rainbow-m-top_medium'
+            type='submit'
+            variant='brand'
+          >
+            <span>Login</span>
+          </Button>
         </form>
       </Card>
     </Centered>

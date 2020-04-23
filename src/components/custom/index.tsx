@@ -1,5 +1,9 @@
 import styled from "styled-components";
-import { Card as Cardbow, Input as Inputbow } from "react-rainbow-components";
+import {
+  Card as Cardbow,
+  Input as Inputbow,
+  Button as Buttonbow,
+} from "react-rainbow-components";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
@@ -13,6 +17,10 @@ export const Section = styled.section`
   @media (max-width: 800px) {
     flex-direction: column;
   }
+`;
+
+export const Create = styled(Buttonbow)`
+  margin-top: 20px;
 `;
 
 // const Card = styled(DefaultCard)`
@@ -54,4 +62,7 @@ export const Input = styled(Inputbow)`
 export const CustomLink = styled(Link)`
   color: #01b6f5;
   text-decoration: none;
+  &hover: {
+    text-decoration: none;
+  }
 `;

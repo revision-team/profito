@@ -4,15 +4,16 @@ import {
   TableWithBrowserPagination,
   ButtonIcon,
 } from "react-rainbow-components";
-import { useQuery, gql } from "@apollo/client";
-import { Container, Section } from "components/custom";
+import { useQuery } from "@apollo/client";
+import { Container, Section, Create, CustomLink } from "components/custom";
 import PageHeader from "components/PageHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router-dom";
+import { GET_PAYMENTS } from "./queries";
 
 export interface Payment {
-  key: string;
+  id: string;
   start: string;
   concluded: boolean;
   end: string;
@@ -42,32 +43,23 @@ export function Table(props: { elements: object[] }) {
         data={props.elements}
         keyField='id'
       >
-        <Column sortable header='Date' field='date' />
-        <Column sortable header='Amount' field='amount' />
-        <Column header='Currency' field='currency' />
-        <Column sortable header='Frequency' field='frequency' />
+        <Column sortable header='Date' field='start' />
+        <Column width={120} sortable header='Amount' field='amount' />
+        <Column width={120} header='Currency' field='currency' />
+        <Column width={150} sortable header='Frequency' field='frequency' />
         <Column header='Description' field='description' />
-        <Column width={60} field='key' component={Actions} value='key' />
+        <Column width={60} field='id' component={Actions} value='id' />
       </TableWithBrowserPagination>
     </div>
   );
 }
 
+export interface PaymentsRequest {
+  payments: Payment[];
+}
+
 export default function Payments() {
-  const { data, loading, error } = useQuery<{ payments: Payment[] }>(gql`
-    {
-      payments {
-        key
-        start
-        concluded
-        end
-        amount
-        currency
-        frequency
-        description
-      }
-    }
-  `);
+  const { data, loading, error } = useQuery<PaymentsRequest>(GET_PAYMENTS);
 
   return (
     <React.Fragment>
@@ -79,7 +71,9 @@ export default function Payments() {
             title={`Payments`}
             description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit.`}
           />
-
+          <Create>
+            <CustomLink to='/payments/create'>Create</CustomLink>
+          </Create>
           <Section className='rainbow-align-content_space-between rainbow-p-top_large'>
             <Table elements={data.payments} />
           </Section>

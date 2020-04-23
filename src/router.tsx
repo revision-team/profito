@@ -14,6 +14,7 @@ import {
   PaymentsEdit,
   Shopifies,
   ShopifiesEdit,
+  PaymentsCreate,
 } from "views";
 
 interface RouteParams {
@@ -52,11 +53,12 @@ function HomeComponent() {
       <Switch>
         <AuthRoute exact path='/dashboard' component={Dashboard} />
         <AuthRoute exact path='/payments' component={Payments} />
-        <AuthRoute exact path='/payments/:key/edit' component={PaymentsEdit} />
+        <AuthRoute exact path='/payments/create' component={PaymentsCreate} />
+        <AuthRoute exact path='/payments/:id/edit' component={PaymentsEdit} />
         <AuthRoute exact path='/resources/shopify' component={Shopifies} />
         <AuthRoute
           exact
-          path='/resources/shopify/:key/edit'
+          path='/resources/shopify/:id/edit'
           component={ShopifiesEdit}
         />
         <Redirect from='*' to='/dashboard' />

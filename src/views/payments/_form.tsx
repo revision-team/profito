@@ -1,5 +1,4 @@
 import React, { useState, ChangeEvent } from "react";
-import { Payment } from "./index";
 import { Container, Section } from "components/custom";
 import PageHeader from "components/PageHeader";
 import {
@@ -10,7 +9,10 @@ import {
   CheckboxToggle,
   Select,
 } from "react-rainbow-components";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery, useMutation, DocumentNode } from "@apollo/client";
+import { GET_CURRENCIES } from "./queries";
+import { useHistory } from "react-router-dom";
+import { Payment } from ".";
 
 export interface Currency {
   name: string;
@@ -21,31 +23,31 @@ export interface FormProps<T> {
   data: T;
   heading: string;
   subheading?: string;
+  query: DocumentNode;
+  redirect: string;
 }
 
 export default function Form(props: FormProps<Payment>) {
-  const [payment, setPayment] = useState({ ...props.data });
+  const history = useHistory();
+
+  const [element, setElement] = useState<Payment>({ ...props.data });
+
   const { data: currencies, loading: loadingCurrencies } = useQuery<{
     currencies: Currency[];
-  }>(gql`
-    {
-      currencies {
-        name
-        acronym
-      }
-    }
-  `);
+  }>(GET_CURRENCIES);
+
+  const [submit] = useMutation(props.query);
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(payment);
+    submit({ variables: element }).then(() => history.push(props.redirect));
   };
 
   const selectCurrency = (e: ChangeEvent<HTMLElement>) =>
-    setPayment({ ...payment, currency: (e.target as HTMLInputElement).value });
+    setElement({ ...element, currency: (e.target as HTMLInputElement).value });
 
   const selectFreqency = (e: ChangeEvent<HTMLElement>) =>
-    setPayment({ ...payment, frequency: (e.target as HTMLInputElement).value });
+    setElement({ ...element, frequency: (e.target as HTMLInputElement).value });
 
   return (
     <Container>
@@ -70,31 +72,36 @@ export default function Form(props: FormProps<Payment>) {
                   <CheckboxToggle
                     label='Finalized'
                     name='concluded'
-                    value={payment.concluded}
+                    disabled={element.frequency !== "recurrent"}
+                    value={element.concluded}
                     onChange={(e) =>
-                      setPayment({ ...payment, concluded: !payment.concluded })
+                      setElement({ ...element, concluded: !element.concluded })
                     }
                   />
                 </div>
                 <div className='rainbow-flex rainbow-justify rainbow-p-horizontal_small'>
                   <DatePicker
                     id='start'
+                    required
                     className='rainbow-m-top_small rainbow-rainbow-forms_inputs-field'
-                    value={payment.start}
+                    value={element.start}
                     onChange={(value) =>
-                      setPayment({ ...payment, start: value.toString() })
+                      setElement({ ...element, start: value.toString() })
                     }
-                    label='Start Date'
+                    label='Date'
                     formatStyle='large'
                   />
 
                   <DatePicker
                     id='end'
                     className='rainbow-m-top_small rainbow-rainbow-forms_inputs-field'
-                    value={payment.end}
-                    disabled={!payment.concluded}
+                    value={element.end}
+                    disabled={
+                      element.frequency !== "recurrent" || !element.concluded
+                    }
+                    minDate={new Date(Date.parse(element.start))}
                     onChange={(value) =>
-                      setPayment({ ...payment, end: value.toString() })
+                      setElement({ ...element, end: value.toString() })
                     }
                     label='End Date'
                     formatStyle='large'
@@ -104,21 +111,22 @@ export default function Form(props: FormProps<Payment>) {
                   <Input
                     label='Amount'
                     name='amount'
+                    required={element.amount === undefined}
                     className='rainbow-m-top_small rainbow-rainbow-forms_inputs-field'
                     type='number'
-                    placeholder={`${payment.currency || "USD"} ${
-                      payment.amount || `0.00`
+                    placeholder={`${element.currency || "USD"} ${
+                      element.amount || `0.00`
                     }`}
                     onChange={(e) =>
-                      setPayment({
-                        ...payment,
+                      setElement({
+                        ...element,
                         amount: JSON.parse(e.target.value),
                       })
                     }
                   />
                   <Select
                     label='Select Label'
-                    disabled={loadingCurrencies}
+                    disabled={!currencies}
                     options={
                       currencies
                         ? currencies.currencies.map((c) => ({
@@ -128,18 +136,18 @@ export default function Form(props: FormProps<Payment>) {
                         : []
                     }
                     className='rainbow-m-top_small rainbow-rainbow-forms_inputs-field'
-                    value={payment.currency}
+                    value={element.currency}
                     onChange={selectCurrency}
                   />
-                  ;
+
                   <Select
                     label='Frequency'
                     options={[
-                      { value: "recurrent", label: "Recurrent" },
                       { value: "one-time", label: "One Time" },
+                      { value: "recurrent", label: "Recurrent" },
                     ]}
                     className='rainbow-m-top_small rainbow-rainbow-forms_inputs-field'
-                    value={payment.frequency}
+                    value={element.frequency}
                     onChange={selectFreqency}
                   />
                 </div>
@@ -148,10 +156,10 @@ export default function Form(props: FormProps<Payment>) {
                     label='Description'
                     name='description'
                     className='rainbow-m-top_small rainbow-rainbow-forms_inputs-field'
-                    value={payment.description}
+                    value={element.description}
                     onChange={(e) =>
-                      setPayment({
-                        ...payment,
+                      setElement({
+                        ...element,
                         description: e.target.value,
                       })
                     }
