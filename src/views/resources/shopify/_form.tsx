@@ -15,13 +15,19 @@ export interface Currency {
 export default function Form(props: FormProps<Shopify>) {
   const history = useHistory();
 
-  const [store, setStore] = useState({ ...props.data });
+  const [element, setElement] = useState({ ...props.data });
 
   const [submit] = useMutation(props.mutation);
+  const [destroy] = useMutation(props.destroy || props.mutation);
+
+  const destroyEvent = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.preventDefault();
+    destroy({ variables: element }).then(() => history.push(props.redirect));
+  };
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    submit({ variables: store }).then(() => history.push(props.redirect));
+    submit({ variables: element }).then(() => history.push(props.redirect));
   };
 
   return (
@@ -32,69 +38,40 @@ export default function Form(props: FormProps<Shopify>) {
         <form onSubmit={submitForm}>
           <Card
             footer={
-              <Button
-                className='rainbow-rainbow-forms_button'
-                variant='brand'
-                type='submit'
-              >
-                <span>Submit</span>
-              </Button>
+              <React.Fragment>
+                <Button
+                  className='rainbow-rainbow-forms_button'
+                  variant='brand'
+                  type='submit'
+                >
+                  <span>Submit</span>
+                </Button>
+                {"  "}
+                {props.destroy && (
+                  <Button
+                    className='rainbow-rainbow-forms_button'
+                    variant='destructive'
+                    type='submit'
+                    onClick={destroyEvent}
+                  >
+                    <span>Destroy</span>
+                  </Button>
+                )}
+              </React.Fragment>
             }
           >
             <Container>
               <article className='rainbow-rainbow-forms_inputs-container'>
                 <div className='rainbow-flex rainbow-justify rainbow-p-horizontal_small'>
                   <Input
-                    label='Store'
-                    name='store'
-                    required
-                    className='rainbow-m-top_small rainbow-rainbow-forms_inputs-field'
-                    value={store.store}
-                    onChange={(e) =>
-                      setStore({
-                        ...store,
-                        store: e.target.value,
-                      })
-                    }
-                  />
-                  <Input
-                    label='Key'
-                    name='username'
-                    required
-                    className='rainbow-m-top_small rainbow-rainbow-forms_inputs-field'
-                    value={store.username}
-                    onChange={(e) =>
-                      setStore({
-                        ...store,
-                        username: e.target.value,
-                      })
-                    }
-                  />
-                  <Input
-                    label='Password'
-                    name='password'
-                    required
-                    className='rainbow-m-top_small rainbow-rainbow-forms_inputs-field'
-                    type='password'
-                    value={store.password}
-                    onChange={(e) =>
-                      setStore({
-                        ...store,
-                        password: e.target.value,
-                      })
-                    }
-                  />
-                </div>
-                <div className='rainbow-flex rainbow-justify rainbow-p-horizontal_small'>
-                  <Input
                     label='Description'
                     name='description'
                     required
                     className='rainbow-m-top_small rainbow-rainbow-forms_inputs-field'
-                    value={store.description}
+                    value={element.description}
                     onChange={(e) =>
-                      setStore({
-                        ...store,
+                      setElement({
+                        ...element,
                         description: e.target.value,
                       })
                     }
