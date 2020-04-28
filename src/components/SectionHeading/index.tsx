@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   // ButtonGroup,
   ButtonIcon,
@@ -20,21 +20,29 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 import {
-  ShoppingCartIcon,
-  MessageIcon,
   BarsIcon,
   // GithubIcon
 } from "../icons";
 import Notification from "./notification";
-import IconNotification from "./iconNotification";
 import { Link, useHistory } from "react-router-dom";
 import Cookies from "react-cookies";
+import { Store } from "store";
+import { ClsNotification, DelNotification } from "store/actions";
+import { Notification as StoreNotification } from "store/types";
 
 interface SectionHeadingProps {
   onToogleSidebar: () => void;
 }
 
 export default function SectionHeading(props: SectionHeadingProps) {
+  const { state, dispatch } = useContext(Store);
+  const { notifications } = state;
+
+  const deleteNotifications = () => dispatch(ClsNotification());
+  const deleteNotification = (n: StoreNotification) =>
+    dispatch(DelNotification(n));
+
+  // TODO: Remove this code
   const email = localStorage.getItem("email") || "Unknown";
   const name = localStorage.getItem("name") || "Unknown";
 
@@ -100,27 +108,27 @@ export default function SectionHeading(props: SectionHeadingProps) {
           buttonSize='large'
           icon={<FontAwesomeIcon icon={faBell} />}
         >
-          <MenuItem label='Notifications (2)' variant='header' />
           <MenuItem
-            icon={
-              <IconNotification
-                icon={
-                  <ShoppingCartIcon className='react-rainbow-admin_header--notification-icon' />
-                }
-              />
-            }
-            label={<Notification title='Your order is placed' />}
+            label={`Notifications (${notifications.length})`}
+            variant='header'
           />
-          <MenuItem
-            icon={
-              <IconNotification
-                icon={
-                  <MessageIcon className='react-rainbow-admin_header--notification-icon' />
-                }
-              />
-            }
-            label={<Notification title='New messages' />}
-          />
+          {notifications.length > 0 && (
+            <MenuItem label={`Clear All`} onClick={deleteNotifications} />
+          )}
+          {notifications.map((n) => (
+            <MenuItem
+              key={n.key}
+              // icon={
+              //   <IconNotification
+              //     icon={
+              //       <MessageIcon className='react-rainbow-admin_header--notification-icon' />
+              //     }
+              //   />
+              // }
+              onClick={() => deleteNotification(n)}
+              label={<Notification title={`${n.message} (${n.key})`} />}
+            />
+          ))}
         </ButtonMenu>
         <AvatarMenu
           src='/assets/images/user3.jpg'

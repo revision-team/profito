@@ -7,12 +7,15 @@ import client from "./apollo";
 import Routes from "router";
 import "styles/index.css";
 import "styles/forms.css";
+import StoreProvider from "store";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <Routes />
-    </ApolloProvider>
+    <StoreProvider>
+      <ApolloProvider client={client}>
+        <Routes />
+      </ApolloProvider>
+    </StoreProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

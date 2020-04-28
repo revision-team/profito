@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import DateRange from "components/dateRange";
 import PageHeader from "components/PageHeader";
 import Tile from "components/Tile";
@@ -6,6 +6,8 @@ import { ShoppingCartIcon } from "components/icons";
 import InteractiveChart from "components/chart";
 
 import { Container, Section } from "components/custom";
+import { Store } from "store";
+import { SetNotification } from "store/actions";
 
 const fakeData = {
   successfulyOrders: {
@@ -15,12 +17,22 @@ const fakeData = {
 };
 
 export default function Dashboard() {
+  const { state, dispatch } = useContext(Store);
+  const { theme } = state;
   return (
     <Container>
       <PageHeader
-        title='Dashboard'
+        title={`Dashboard theme ${theme}`}
         description='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
       />
+      <button
+        onClick={() => {
+          dispatch(SetNotification("This is a notification"));
+          console.log("submited notification");
+        }}
+      >
+        Default notification
+      </button>
       <Section className='rainbow-align-content_space-between rainbow-p-top_large'>
         <DateRange />
       </Section>
