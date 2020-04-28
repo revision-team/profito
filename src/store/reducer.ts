@@ -1,10 +1,13 @@
 import { State } from "./types";
 import {
+  Action,
+  IDateRangeAction,
+  INotificationAction,
   SET_NOTIFICATION,
   DEL_NOTIFICATION,
   CLS_NOTIFICATION,
-  Action,
-  INotificationAction,
+  SET_DATE_RANGE,
+  SET_SEL_DATE_RANGE,
 } from "./actions";
 
 export const reducer: React.Reducer<State, Action> = (state, action) => {
@@ -27,7 +30,16 @@ export const reducer: React.Reducer<State, Action> = (state, action) => {
     case CLS_NOTIFICATION: {
       return { ...state, notifications: [] };
     }
-    //
+    // DATE RANGE
+    case SET_DATE_RANGE: {
+      const { payload } = action as IDateRangeAction;
+      return { ...state, dateRange: payload };
+    }
+    case SET_SEL_DATE_RANGE: {
+      const { payload } = action as IDateRangeAction;
+      return { ...state, selectedRange: payload };
+    }
+    // Nothing matched
     default: {
       return state;
     }

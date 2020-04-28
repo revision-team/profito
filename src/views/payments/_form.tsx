@@ -104,9 +104,12 @@ export default function Form(props: FormProps<Payment>) {
                     id='start'
                     required
                     className='rainbow-m-top_small rainbow-rainbow-forms_inputs-field'
-                    value={element.start}
+                    value={element.date}
                     onChange={(value) =>
-                      setElement({ ...element, start: value.toString() })
+                      setElement((prevElement) => ({
+                        ...prevElement,
+                        date: value.toString(),
+                      }))
                     }
                     label='Date'
                     formatStyle='large'
@@ -115,13 +118,16 @@ export default function Form(props: FormProps<Payment>) {
                   <DatePicker
                     id='end'
                     className='rainbow-m-top_small rainbow-rainbow-forms_inputs-field'
-                    value={element.end}
+                    value={element.date_end}
                     disabled={
                       element.frequency !== "recurrent" || !element.concluded
                     }
-                    minDate={new Date(Date.parse(element.start))}
+                    minDate={new Date(Date.parse(element.date))}
                     onChange={(value) =>
-                      setElement({ ...element, end: value.toString() })
+                      setElement((prevElement) => ({
+                        ...prevElement,
+                        date_end: value.toString(),
+                      }))
                     }
                     label='End Date'
                     formatStyle='large'
@@ -169,6 +175,20 @@ export default function Form(props: FormProps<Payment>) {
                     className='rainbow-m-top_small rainbow-rainbow-forms_inputs-field'
                     value={element.frequency}
                     onChange={selectFreqency}
+                  />
+                </div>
+                <div className='rainbow-flex rainbow-justify rainbow-p-horizontal_small'>
+                  <Input
+                    label='Employee Name'
+                    name='employee'
+                    className='rainbow-m-top_small rainbow-rainbow-forms_inputs-field'
+                    value={element.employee}
+                    onChange={(e) =>
+                      setElement({
+                        ...element,
+                        employee: e.target.value,
+                      })
+                    }
                   />
                 </div>
                 <div className='rainbow-flex rainbow-justify rainbow-p-horizontal_small'>

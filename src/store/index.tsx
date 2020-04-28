@@ -3,11 +3,19 @@ import { State } from "./types";
 import { reducer } from "./reducer";
 import { Action } from "./actions";
 
+const initDateRange = {
+  startDate: new Date(),
+  endDate: new Date(),
+  key: "selection",
+};
+
 const initialState = {
   lang: "en",
   theme: "light",
   authenticated: true,
   notifications: [],
+  dateRange: initDateRange,
+  selectedRange: initDateRange,
 } as State;
 
 interface StoreType {

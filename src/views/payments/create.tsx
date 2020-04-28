@@ -12,8 +12,9 @@ export default function Edit() {
             currency: "USD",
             frequency: "one-time",
             concluded: false,
-            end: "",
+            date_end: "",
             description: "",
+            employee: "",
           } as Payment
         }
         heading='Create Payment'

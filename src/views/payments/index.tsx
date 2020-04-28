@@ -13,14 +13,15 @@ import { useHistory } from "react-router-dom";
 import { GET_PAYMENTS } from "./queries";
 
 export interface Payment {
-  id: string;
-  start: string;
-  concluded: boolean;
-  end: string;
   amount: number;
   currency: string;
+  date: string;
+  date_end: string;
+  concluded: boolean;
   frequency: string;
   description: string;
+  employee: string;
+  id: string;
 }
 
 const Actions = ({ value }: { value: string }) => {
@@ -43,7 +44,7 @@ export function Table(props: { elements: object[] }) {
         data={props.elements}
         keyField='id'
       >
-        <Column sortable header='Date' field='start' />
+        <Column sortable header='Date' field='date' />
         <Column width={120} sortable header='Amount' field='amount' />
         <Column width={120} header='Currency' field='currency' />
         <Column width={150} sortable header='Frequency' field='frequency' />

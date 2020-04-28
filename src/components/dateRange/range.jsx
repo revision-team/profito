@@ -1,20 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
+import { Store } from "store";
+import { SetDateRange } from "store/actions";
 
-export default function Range(props) {
-  const [selected, setSelected] = useState({
-    startDate: new Date(),
-    endDate: new Date(),
-    key: "selection",
-  });
+export default function Range() {
+  const { state, dispatch } = useContext(Store);
 
-  const changeDates = (ranges) => setSelected(ranges.selection);
+  const changeDates = (ranges) => dispatch(SetDateRange(ranges.selection));
 
   return (
     <DateRangePicker
-      ranges={[selected]}
+      ranges={[state.dateRange]}
       months={2}
       direction='horizontal'
       showDateDisplay={false}

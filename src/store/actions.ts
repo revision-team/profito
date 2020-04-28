@@ -1,4 +1,4 @@
-import { Notification } from "./types";
+import { Notification, DateRange } from "./types";
 
 // Action interface
 export interface IAction {
@@ -33,7 +33,32 @@ export function ClsNotification(): IAction {
   return { type: CLS_NOTIFICATION };
 }
 
+// ******************
+// DATE RANGE ACTIONS
+// ******************
+
+export const SET_DATE_RANGE = "set_range";
+export const SET_SEL_DATE_RANGE = "set_sel_range";
+
+export interface IDateRangeAction extends IAction {
+  payload: DateRange;
+}
+
+export function SetDateRange(range: DateRange): IDateRangeAction {
+  return {
+    type: SET_DATE_RANGE,
+    payload: range,
+  };
+}
+
+export function SetSelectedDateRange(range: DateRange): IDateRangeAction {
+  return {
+    type: SET_SEL_DATE_RANGE,
+    payload: range,
+  };
+}
+
 // *****************
 // UNION TYPE ACTION
 // *****************
-export type Action = IAction | INotificationAction;
+export type Action = IAction | INotificationAction | IDateRangeAction;

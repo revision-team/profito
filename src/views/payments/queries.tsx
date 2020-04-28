@@ -3,14 +3,15 @@ import { gql } from "@apollo/client";
 export const GET_PAYMENTS = gql`
   {
     payments {
-      id
-      start
-      concluded
-      end
       amount
       currency
+      date
+      date_end
+      concluded
       frequency
       description
+      employee
+      id
     }
   }
 `;
@@ -18,14 +19,15 @@ export const GET_PAYMENTS = gql`
 export const GET_PAYMENT = gql`
   query Payment($id: String) {
     payment(id: $id) {
-      id
-      start
-      concluded
-      end
       amount
       currency
+      date
+      date_end
+      concluded
       frequency
       description
+      employee
+      id
     }
   }
 `;
@@ -42,32 +44,35 @@ export const GET_CURRENCIES = gql`
 export const PAYMENT_EDIT = gql`
   mutation UpdatePayment(
     $id: String!
+    $employee: String!
     $description: String!
     $amount: Float!
     $concluded: Boolean!
     $currency: String!
-    $end: String!
+    $date_end: String!
     $frequency: String!
-    $start: String!
+    $date: String!
   ) {
     paymentsEdit(
       id: $id
       description: $description
+      employee: $employee
       amount: $amount
       concluded: $concluded
       currency: $currency
-      end: $end
+      date_end: $date_end
       frequency: $frequency
-      start: $start
+      date: $date
     ) {
-      id
       amount
-      concluded
       currency
-      description
-      end
+      date
+      date_end
+      concluded
       frequency
-      start
+      description
+      employee
+      id
     }
   }
 `;
@@ -75,30 +80,33 @@ export const PAYMENT_EDIT = gql`
 export const PAYMENT_CREATE = gql`
   mutation CreatePayment(
     $description: String!
+    $employee: String!
     $amount: Float!
     $concluded: Boolean!
     $currency: String!
-    $end: String!
+    $date_end: String!
     $frequency: String!
-    $start: String!
+    $date: String!
   ) {
     paymentsCreate(
       description: $description
+      employee: $employee
       amount: $amount
       concluded: $concluded
       currency: $currency
-      end: $end
+      date_end: $date_end
       frequency: $frequency
-      start: $start
+      date: $date
     ) {
-      id
       amount
-      concluded
       currency
-      description
-      end
+      date
+      date_end
+      concluded
       frequency
-      start
+      description
+      employee
+      id
     }
   }
 `;
@@ -107,13 +115,14 @@ export const PAYMENT_DESTROY = gql`
   mutation DestroyPayment($id: String!) {
     paymentsDestroy(id: $id) {
       amount
-      concluded
       currency
-      description
-      end
+      date
+      date_end
+      concluded
       frequency
+      description
+      employee
       id
-      start
     }
   }
 `;
