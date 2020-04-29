@@ -10,6 +10,8 @@ import { Store } from "store";
 import { useQuery, gql } from "@apollo/client";
 import _ from "lodash";
 import { Button } from "react-rainbow-components";
+import Loading from "components/loading";
+import { DateRange as DateRangeType } from "store/types";
 
 const GET_PAYMENTS = gql`
   {
@@ -44,30 +46,44 @@ const fakeData = {
   },
 };
 
+function inRange(p: Payment, range: DateRangeType) {
+  const date = Date.parse(p.date);
+  const date_form = Date.parse(range.startDate.toDateString());
+  const date_to = Date.parse(range.endDate.toDateString());
+
+  return date >= date_form && date <= date_to;
+}
+
 export default function Dashboard() {
   const {
     state: { selectedRange: range },
   } = useContext(Store);
   const [payments, setPayments] = useState<Payment[]>([]);
+  const [income, setIncome] = useState(0);
+  const [outcome, setOutcome] = useState(0);
 
-  const { data, loading, error, refetch } = useQuery<PaymentQuery>(
-    GET_PAYMENTS
-  );
-
-  const inRange = (p: Payment) => {
-    const date = Date.parse(p.date);
-    const date_form = Date.parse(range.startDate.toDateString());
-    const date_to = Date.parse(range.endDate.toDateString());
-
-    return date >= date_form && date <= date_to;
-  };
+  const { data, loading, refetch } = useQuery<PaymentQuery>(GET_PAYMENTS);
 
   useEffect(() => {
-    if (data) setPayments(data.payments.filter((p) => inRange(p)));
+    if (data) {
+      setPayments(data.payments.filter((p) => inRange(p, range)));
+    }
   }, [data, range]);
 
-  const income = () => 0;
-  const outcome = () => _.sum(payments.map((p) => p.amount));
+  useEffect(() => {
+    let outcome = _.sum(payments.map((p) => p.amount));
+    setOutcome(outcome);
+  }, [payments]);
+
+  // const chartData = () => {
+  //   const labels;
+  //   return {
+  //     labels,
+  //     values,
+  //   };
+  // };
+
+  if (loading) return <Loading />;
 
   return (
     <Container>
@@ -81,11 +97,11 @@ export default function Dashboard() {
         <Button onClick={() => refetch()}>Refresh</Button>
       </Section>
       <Section className='rainbow-align-content_space-between rainbow-p-top_large'>
-        <Tile title='Income' label={income()} icon={<ShoppingCartIcon />} />
-        <Tile title='Outcome' label={outcome()} icon={<ShoppingCartIcon />} />
+        <Tile title='Income' label={income} icon={<ShoppingCartIcon />} />
+        <Tile title='Outcome' label={outcome} icon={<ShoppingCartIcon />} />
         <Tile
           title='Revenue'
-          label={income() - outcome()}
+          label={income - outcome}
           icon={<ShoppingCartIcon />}
         />
       </Section>
@@ -94,9 +110,21 @@ export default function Dashboard() {
           labels={fakeData.successfulyOrders.labels}
           datasets={[
             {
-              title: "values",
-              backgroundColor: "red",
-              borderColor: "blue",
+              title: "income",
+              backgroundColor: "#5DD18D",
+              borderColor: "#34B271",
+              values: fakeData.successfulyOrders.value,
+            },
+            {
+              title: "outcome",
+              backgroundColor: "#F7076A",
+              borderColor: "#F7076A",
+              values: _.reverse(fakeData.successfulyOrders.value),
+            },
+            {
+              title: "revenue",
+              backgroundColor: "#6860DB",
+              borderColor: "#6860DB",
               values: fakeData.successfulyOrders.value,
             },
           ]}

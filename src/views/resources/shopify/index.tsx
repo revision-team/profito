@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router-dom";
 import { GET_SHOPIFIES } from "./queries";
+import Loading from "components/loading";
 
 export interface Shopify {
   id: string;
@@ -57,7 +58,7 @@ export default function Payments() {
 
   return (
     <React.Fragment>
-      {loading && <p>Loading...</p>}
+      {loading && <Loading />}
       {error && <p>{error.message}</p>}
       {data && (
         <Container>

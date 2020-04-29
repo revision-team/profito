@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { Payment } from "./index";
 import Form from "./_form";
 import { GET_PAYMENT, PAYMENT_EDIT, PAYMENT_DESTROY } from "./queries";
+import Loading from "components/loading";
 
 export interface PaymentRequest {
   payment: Payment;
@@ -17,7 +18,7 @@ export default function Edit() {
 
   return (
     <React.Fragment>
-      {loading && <p>Loading...</p>}
+      {loading && <Loading />}
       {error && <p>{error.message}</p>}
       {data && (
         <Form

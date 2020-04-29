@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router-dom";
 import { GET_PAYMENTS } from "./queries";
+import Loading from "components/loading";
 
 export interface Payment {
   amount: number;
@@ -64,7 +65,7 @@ export default function Payments() {
 
   return (
     <React.Fragment>
-      {loading && <p>Loading...</p>}
+      {loading && <Loading />}
       {error && <p>{error.message}</p>}
       {data && (
         <Container>
