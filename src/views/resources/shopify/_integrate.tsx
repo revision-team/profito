@@ -3,6 +3,7 @@ import { Centered } from "components/custom";
 import { Input } from "react-rainbow-components";
 import { SHOPIFY_SYSTEM } from "./queries";
 import { useQuery } from "@apollo/client";
+import Loading from "components/loading";
 
 interface ShopApplication {
   redirect: string;
@@ -44,7 +45,7 @@ export default function Integrate() {
   return (
     <Centered>
       {error && <p>{error.message}</p>}
-      {loading && <p>Loading...</p>}
+      {loading && <Loading />}
       {data && (
         <form onSubmit={handleSubmit}>
           <Input
