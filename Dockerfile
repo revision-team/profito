@@ -1,4 +1,4 @@
-FROM node:10-slim as builder
+FROM node:10 as builder
 WORKDIR /app
 ADD . .
 RUN yarn install
