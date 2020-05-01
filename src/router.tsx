@@ -16,6 +16,7 @@ import {
   Shopifies,
   ShopifiesEdit,
   ShopifiesCreate,
+  Messages
 } from "views";
 
 interface RouteParams {
@@ -59,6 +60,10 @@ function HomeComponent() {
         <AuthRoute exact path='/payments/:id/edit' component={PaymentsEdit} />
 
         <AuthRoute exact path='/resources/shopify' component={Shopifies} />
+        
+        <AuthRoute exact path='/messages' component={Messages} />
+
+        
         <AuthRoute
           exact
           path='/resources/shopify/create'

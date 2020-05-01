@@ -12,7 +12,7 @@ import {
   // ChartsIcon,
   DashboardIcon,
   // FormsIcon,
-  // MessageIcon,
+   MessageIcon,
   // PagesIcon,
   // PuzzleIcon,
 } from "../components/icons";
@@ -96,6 +96,15 @@ export const Home: FunctionComponent = (props) => {
             label='Shopify'
             onClick={() => history.push("/resources/shopify")}
           />
+
+          <SidebarItem
+            className='react-rainbow-admin-app_sidebar-item'
+            icon={<MessageIcon />}
+            name='messages'
+            label='Messages'
+            onClick={() => history.push("/messages")}
+          />
+
         </Sidebar>
         <RenderIf isTrue={!isSidebarHidden}>
           <div className='react-rainbow-admin-app_sidebar-back-button-container'>
