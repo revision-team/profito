@@ -9,6 +9,8 @@ import Payments from "./payments";
 import PaymentsEdit from "./payments/edit";
 import PaymentsCreate from "./payments/create";
 
+import Messages from "./messages"
+
 import Shopifies from "./resources/shopify";
 import ShopifiesEdit from "./resources/shopify/edit";
 import ShopifiesCreate from "./resources/shopify/create";
@@ -24,4 +26,5 @@ export {
   ShopifiesCreate,
   Login,
   Register,
+  Messages
 };
