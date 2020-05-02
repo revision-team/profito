@@ -15,15 +15,16 @@ const getTextClassNames = (isUser: boolean|undefined)  => classnames({
 });
 
 type ChatMessageProps = {
+    userid: string;
     messages: Message[]
   }
 
 
-const ChatMessages: FunctionComponent<ChatMessageProps> = ({ messages=[] }) => (
-
+const ChatMessages: FunctionComponent<ChatMessageProps> = ({ userid, messages=[] }) => (
+    //console.log("userid=", userid);
     <React.Fragment>
         {
-     messages.map((message, index) => {
+     messages.filter((message) => message.userid===userid).map((message, index) => {
         const {
             photoUrl,
             text,

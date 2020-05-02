@@ -1,4 +1,5 @@
 export interface Contact  {
+    userid: string;
     name:string;
     photoUrl?:string
     lastSeenDate: string;
@@ -13,6 +14,8 @@ export interface SentTextType {
 }
 
 export interface Message  {
+    userid: string;
+    key: string;
     photoUrl?: string;
     text?: string;
     isUser?: boolean;

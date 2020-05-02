@@ -16,88 +16,51 @@ import ChatMessages from "./chatMessages";
 import SelectedContact from "./selectedContact";
 import "./styles.css";
 import {InputEvent} from "./typesInterfaces"
-
-const contacts = [
-    {
-        name: 'Saray',
-        lastSeenDate: '8:30 am',
-        lastMessage: 'A rainbow i a meteorological phenomenon that is A rainbow i a meteorological phenomenon that is something',
-        photoUrl: '/assets/images/user2.jpg',
-        isOnline: true,
-    },
-    {
-        name: 'Leo',
-        lastSeenDate: '5:30 pm',
-        lastMessage: 'A rainbow i a meteorological phenomenon that is something',
-        photoUrl: '/assets/images/user1.jpg',
-        isOnline: true,
-    },
-    {
-        name: 'Rey',
-        lastSeenDate: '10:15 pm',
-        lastMessage: 'A rainbow i a meteorological phenomenon that is something',
-        photoUrl: '/assets/images/user3.jpg',
-    },
-    {
-        name: 'Jose',
-        lastSeenDate: '8:45 am',
-        lastMessage: 'A rainbow i a meteorological phenomenon that is something',
-        isOnline: true,
-    },
-    {
-        name: 'Juan',
-        lastSeenDate: 'yesterday',
-        lastMessage: 'A rainbow i a meteorological phenomenon that is something',
-    },
-    {
-        name: 'Tahimi',
-        lastSeenDate: 'yesterday',
-        lastMessage: 'A rainbow i a meteorological phenomenon that is something',
-    },
-    {
-        name: 'Pepe',
-        lastSeenDate: 'yesterday',
-        lastMessage: 'A rainbow i a meteorological phenomenon that is something',
-    },
-];
-
-const messages = [
-    {
-        photoUrl: '/assets/images/user2.jpg',
-        text: 'I have a problem with a topup',
-        sentDate: '1:06 PM',
-    },
-    {
-        photoUrl: '/assets/images/user4.jpg',
-        text: 'Verify the account',
-        isUser: true,
-        isChecked: true,
-        sentDate: '1:07 PM',
-    },
-    {
-        photoUrl: '/assets/images/user2.jpg',
-        text: 'Already all is ok, thanks',
-        sentDate: '1:19 PM',
-    },
-    {
-        photoUrl: '/assets/images/user4.jpg',
-        text: 'ok',
-        isUser: true,
-        sentDate: '1:22 PM',
-    },
-];
+import {contacts,messages} from "./dummydata"
 
 
 export default function Messages(){
     
-
+    interface MessageInterface {
+        message: string;
+      }
+    
     const [selectedContactIndex, setContactIndex] = useState(0)
     const [searchTerm, setSearchTerm]= useState("")
+    const [element, setElement] = useState<MessageInterface>({message:""})
 
     const  getContacts = () => {
         //const { searchTerm } = this.state;
         return filter(searchTerm, contacts);
     }
+
+    const handleKeyDown = (event: React.KeyboardEvent) => { 
+        if (event.key === 'Enter' && element.message.trim()) {
+            //console.log("entered");
+            addNotificationAction();
+          }
+    }
+
+    const addNotificationAction = () => {
+        //console.log("selectedContactIndex=",selectedContactIndex);
+        const id= "id" + Math.floor(Math.random() * 6000) + 100 ;
+        const message = element.message;
+        const photoUrl = contacts[selectedContactIndex].photoUrl+"";
+        const userid =  contacts[selectedContactIndex].userid+"";
+        messages.push(        {
+            userid,
+            key:id,
+            photoUrl ,
+            text: message,
+            sentDate: '1:06 PM',
+        });
+        //console.log("called addNotificationAction,id=", id +", message=",element.message);
+        setElement({
+            ...element,
+            message: "",
+        })
+    };
+    
 
     const getSelectedContact = () => {
         //const { selectedContactIndex } = this.state;
@@ -114,11 +77,13 @@ export default function Messages(){
         setContactIndex(selectedIndex);
     }
 
+
         //const { searchTerm, selectedContactIndex } = this.state;
         const {
             photoUrl,
             name,
             isOnline,
+            userid
         } = getSelectedContact();
         return (
             <div className="react-rainbow-admin-messages">
@@ -146,7 +111,7 @@ export default function Messages(){
                         isOnline={isOnline} />
                     <span className="react-rainbow-admin-messages_body--divider" />
                     <div className="react-rainbow-admin-messages_body-messages">
-                        <ChatMessages messages={messages} />
+                        <ChatMessages userid={userid} messages={messages} />
                     </div>
                     <div className="react-rainbow-admin-messages_input-container">
                         <div className="react-rainbow-admin-messages_input-options">
@@ -162,7 +127,17 @@ export default function Messages(){
                             hideLabel
                             placeholder="Say something"
                             icon={<ArrowUp />}
-                            iconPosition="right" />
+                            iconPosition="right" 
+                            onKeyDown={handleKeyDown}
+                            value={element.message}
+                            onChange={(e) =>
+                              setElement({
+                                ...element,
+                                message: e.target.value,
+                              })
+                            }
+              
+                            />
                     </div>
                 </div>
             </div>
