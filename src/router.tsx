@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, Suspense, lazy } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,18 +6,28 @@ import {
   Redirect,
 } from "react-router-dom";
 import { Home as HomeLayout } from "layouts/Home";
+import Loading from "components/loading";
 import {
-  Dashboard,
-  Login,
-  Register,
-  Payments,
-  PaymentsEdit,
-  PaymentsCreate,
-  Shopifies,
-  ShopifiesEdit,
-  ShopifiesCreate,
-  Messages
+  Dashboard
+  // Login,
+  // Register,
+  // Payments,
+  // PaymentsEdit,
+  // PaymentsCreate,
+  // Shopifies,
+  // ShopifiesEdit,
+  // ShopifiesCreate
 } from "views";
+
+const  Login = lazy(() => import('./views/login'));
+const  Register = lazy(() => import('./views/register'));
+const  Payments = lazy(() => import('./views/payments'));
+const  PaymentsEdit = lazy(() => import('./views/payments/edit'));
+const  PaymentsCreate = lazy(() => import('./views/payments/create'));
+const  Shopifies = lazy(() => import('./views/resources/shopify'));
+const  ShopifiesEdit = lazy(() => import('./views/resources/shopify/edit'));
+const  ShopifiesCreate = lazy(() => import('./views/resources/shopify/create'));
+const  Messages = lazy(() => import('./views/messages'));
 
 interface RouteParams {
   exact?: boolean;
@@ -40,11 +50,13 @@ const AuthRoute: FunctionComponent<RouteParams> = (props) => {
 export default function Routes() {
   return (
     <Router>
-      <Switch>
-        {/* <AuthRoute exact path='/' component={Home} /> */}
-        <Route path='/auth' render={() => <LoginComponent />} />
-        <Route path='/' render={() => <HomeComponent />} />
-      </Switch>
+      <Suspense fallback={<Loading />}>
+        <Switch>
+          {/* <AuthRoute exact path='/' component={Home} /> */}
+          <Route path='/auth' render={() => <LoginComponent />} />
+          <Route path='/' render={() => <HomeComponent />} />
+        </Switch>
+      </Suspense>
     </Router>
   );
 }
@@ -60,10 +72,10 @@ function HomeComponent() {
         <AuthRoute exact path='/payments/:id/edit' component={PaymentsEdit} />
 
         <AuthRoute exact path='/resources/shopify' component={Shopifies} />
-        
+
         <AuthRoute exact path='/messages' component={Messages} />
 
-        
+
         <AuthRoute
           exact
           path='/resources/shopify/create'
