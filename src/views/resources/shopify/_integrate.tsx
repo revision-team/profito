@@ -1,6 +1,5 @@
 import React, { useState, ChangeEvent } from "react";
-import { Centered } from "components/custom";
-import { Input } from "react-rainbow-components";
+import { Centered } from "components/styled";
 import { SHOPIFY_SYSTEM } from "./queries";
 import { useQuery } from "@apollo/client";
 import Loading from "components/loading";
@@ -46,15 +45,7 @@ export default function Integrate() {
     <Centered>
       {error && <p>{error.message}</p>}
       {loading && <Loading />}
-      {data && (
-        <form onSubmit={handleSubmit}>
-          <Input
-            placeholder='input shopify store'
-            value={store}
-            onChange={handleChange}
-          />
-        </form>
-      )}
+      {data && <form onSubmit={handleSubmit}></form>}
     </Centered>
   );
 }

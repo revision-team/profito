@@ -2,6 +2,7 @@ import React from "react";
 import { State } from "./types";
 import { reducer } from "./reducer";
 import { Action } from "./actions";
+import { UserSession } from "models/users";
 
 const initDateRange = {
   startDate: new Date(),
@@ -11,8 +12,8 @@ const initDateRange = {
 
 const initialState = {
   lang: "en",
-  theme: "light",
-  authenticated: true,
+  theme: "dark",
+  session: {} as UserSession,
   notifications: [],
   dateRange: initDateRange,
   selectedRange: initDateRange,
