@@ -1,58 +1,29 @@
-import React, { FunctionComponent, Suspense, lazy } from "react";
+import React, { Suspense, lazy } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from "react-router-dom";
-import { Home as HomeLayout } from "layouts/Home";
+import { Home as HomeLayout } from "layouts/home";
+import SessionLayout from "layouts/session";
 import Loading from "components/loading";
-import {
-  Dashboard
-  // Login,
-  // Register,
-  // Payments,
-  // PaymentsEdit,
-  // PaymentsCreate,
-  // Shopifies,
-  // ShopifiesEdit,
-  // ShopifiesCreate
-} from "views";
+import Dashboard from "views/dashboard";
 
-const  Login = lazy(() => import('./views/login'));
-const  Register = lazy(() => import('./views/register'));
-const  Payments = lazy(() => import('./views/payments'));
-const  PaymentsEdit = lazy(() => import('./views/payments/edit'));
-const  PaymentsCreate = lazy(() => import('./views/payments/create'));
-const  Shopifies = lazy(() => import('./views/resources/shopify'));
-const  ShopifiesEdit = lazy(() => import('./views/resources/shopify/edit'));
-const  ShopifiesCreate = lazy(() => import('./views/resources/shopify/create'));
-const  Messages = lazy(() => import('./views/messages'));
-
-interface RouteParams {
-  exact?: boolean;
-  path: string;
-  component: FunctionComponent;
-  authenticate?: boolean;
-}
-
-const AuthRoute: FunctionComponent<RouteParams> = (props) => {
-  const name = localStorage.getItem("name");
-
-  if (name === null) {
-    return <Redirect to={`/auth/login?redirect=${props.path}`} />;
-  }
-  return (
-    <Route exact={props.exact} path={props.path} component={props.component} />
-  );
-};
+const Login = lazy(() => import("./views/registration/login"));
+const Register = lazy(() => import("./views/registration/register"));
+const Payments = lazy(() => import("./views/payments"));
+const PaymentsEdit = lazy(() => import("./views/payments/edit"));
+const PaymentsCreate = lazy(() => import("./views/payments/create"));
+const Shopifies = lazy(() => import("./views/resources/shopify"));
+const ShopifiesEdit = lazy(() => import("./views/resources/shopify/edit"));
+const ShopifiesCreate = lazy(() => import("./views/resources/shopify/create"));
 
 export default function Routes() {
   return (
     <Router>
       <Suspense fallback={<Loading />}>
         <Switch>
-          {/* <AuthRoute exact path='/' component={Home} /> */}
           <Route path='/auth' render={() => <LoginComponent />} />
           <Route path='/' render={() => <HomeComponent />} />
         </Switch>
@@ -65,27 +36,27 @@ function HomeComponent() {
   return (
     <HomeLayout>
       <Switch>
-        <AuthRoute exact path='/dashboard' component={Dashboard} />
+        {/* DASHBOARD */}
+        <Route exact path='/dashboard' component={Dashboard} />
 
-        <AuthRoute exact path='/payments' component={Payments} />
-        <AuthRoute exact path='/payments/create' component={PaymentsCreate} />
-        <AuthRoute exact path='/payments/:id/edit' component={PaymentsEdit} />
+        {/* PAYMENTS */}
+        <Route exact path='/payments' component={Payments} />
+        <Route exact path='/payments/create' component={PaymentsCreate} />
+        <Route exact path='/payments/:id/edit' component={PaymentsEdit} />
 
-        <AuthRoute exact path='/resources/shopify' component={Shopifies} />
-
-        <AuthRoute exact path='/messages' component={Messages} />
-
-
-        <AuthRoute
+        {/* RESOURCES SHOPIFY */}
+        <Route exact path='/resources/shopify' component={Shopifies} />
+        <Route
           exact
           path='/resources/shopify/create'
           component={ShopifiesCreate}
         />
-        <AuthRoute
+        <Route
           exact
           path='/resources/shopify/:id/edit'
           component={ShopifiesEdit}
         />
+
         <Redirect from='*' to='/dashboard' />
       </Switch>
     </HomeLayout>
@@ -94,9 +65,11 @@ function HomeComponent() {
 
 function LoginComponent() {
   return (
-    <Switch>
-      <Route exact path='/auth/login' component={Login} />
-      <Route exact path='/auth/register' component={Register} />
-    </Switch>
+    <SessionLayout>
+      <Switch>
+        <Route exact path='/auth/login' component={Login} />
+        <Route exact path='/auth/register' component={Register} />
+      </Switch>
+    </SessionLayout>
   );
 }

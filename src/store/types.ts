@@ -1,3 +1,7 @@
+import { UserSession } from "models/users";
+
+export type AvailableTheme = "light" | "dark";
+
 export class Notification {
   constructor(public message: string, public key: number) {}
 }
@@ -11,10 +15,15 @@ export class DateRange {
 }
 
 export interface State {
+  // SYSTEM
   lang: string;
-  theme: string;
-  authenticated: boolean;
-  notifications: Notification[];
+  theme: AvailableTheme;
+  session: UserSession;
+  // CHAT COLLAPSE
+  showChat: boolean;
+  // DATE RANGE
   dateRange: DateRange;
   selectedRange: DateRange;
+  // COLLECTIONS
+  notifications: Notification[];
 }

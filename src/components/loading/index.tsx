@@ -1,11 +1,11 @@
 import React from "react";
-import { Spinner } from "react-rainbow-components";
-import { Centered } from "components/custom";
+import { Centered } from "components/styled";
+import { CircularProgress } from "@material-ui/core";
 
 export default function Loading() {
   return (
     <Centered>
-      <Spinner size='large' />
+      <CircularProgress />
     </Centered>
   );
 }
