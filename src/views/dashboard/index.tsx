@@ -1,5 +1,6 @@
 import React from "react";
 import { gql } from "@apollo/client";
+import { Typography } from "@material-ui/core";
 
 const GET_PAYMENTS = gql`
   {
@@ -28,5 +29,16 @@ interface PaymentQuery {
 }
 
 export default function Dashboard() {
-  return <div></div>;
+  return (
+    <React.Fragment>
+      {[...new Array(100)].map((e) => (
+        <Typography key={e}>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur
+          possimus odio quo quasi rerum expedita sed! Corrupti in magni earum
+          pariatur esse delectus, cupiditate tenetur, maiores ad possimus, vitae
+          quo?
+        </Typography>
+      ))}
+    </React.Fragment>
+  );
 }

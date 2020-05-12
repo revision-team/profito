@@ -25,6 +25,25 @@ export function ToggleTheme(): IAction {
   return { type: TOGGLE_THEME };
 }
 
+// *****************
+// SHOW CHAT ACTIONS
+// *****************
+
+export const SET_CHAT = "set_chet";
+export const TOGGLE_CHAT = "toggle_chat";
+
+export interface IShowChatAction extends IAction {
+  payload: boolean;
+}
+
+export function SetShowChat(showChat: boolean): IShowChatAction {
+  return { type: SET_CHAT, payload: showChat };
+}
+
+export function ToggleShowChat(): IAction {
+  return { type: TOGGLE_CHAT };
+}
+
 // *********************
 // NOTIFICATIONS ACTIONS
 // *********************
@@ -107,6 +126,7 @@ export function ClsSession(): IAction {
 export type Action =
   | IAction
   | IThemeAction
+  | IShowChatAction
   | INotificationAction
   | IDateRangeAction
   | ISessionAction;

@@ -15,10 +15,15 @@ export class DateRange {
 }
 
 export interface State {
+  // SYSTEM
   lang: string;
   theme: AvailableTheme;
   session: UserSession;
-  notifications: Notification[];
+  // CHAT COLLAPSE
+  showChat: boolean;
+  // DATE RANGE
   dateRange: DateRange;
   selectedRange: DateRange;
+  // COLLECTIONS
+  notifications: Notification[];
 }

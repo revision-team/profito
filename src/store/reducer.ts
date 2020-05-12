@@ -14,6 +14,9 @@ import {
   CLS_SESSION,
   SET_THEME,
   TOGGLE_THEME,
+  SET_CHAT,
+  IShowChatAction,
+  TOGGLE_CHAT,
 } from "./actions";
 import { UserSession } from "models/users";
 
@@ -27,6 +30,14 @@ export const reducer: React.Reducer<State, Action> = (state, action) => {
     case TOGGLE_THEME: {
       const newTheme = state.theme === "light" ? "dark" : "light";
       return { ...state, theme: newTheme };
+    }
+    // SHOW CHAT
+    case SET_CHAT: {
+      const { payload } = action as IShowChatAction;
+      return { ...state, showChat: payload };
+    }
+    case TOGGLE_CHAT: {
+      return { ...state, showChat: !state.showChat };
     }
     // NOTIFICATIONS
     case SET_NOTIFICATION: {
