@@ -1,10 +1,14 @@
 import React, { useState, useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { Centered } from "components/styled";
-import { Paper, Input, Button, makeStyles } from "@material-ui/core";
 import { UserSession } from "models/users";
 import { Store } from "store";
 import { SetSession } from "store/actions";
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { Typography ,Container, Button, makeStyles, Avatar ,CssBaseline ,TextField ,FormControlLabel ,Checkbox ,Link ,Grid   } from "@material-ui/core";
+
+
+
 
 interface UserData {
   email: string;
@@ -13,7 +17,21 @@ interface UserData {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    padding: theme.spacing(3),
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
   },
 }));
 
@@ -26,6 +44,7 @@ export default function Login() {
   const { redirect } = useParams();
 
   const [data, setData] = useState<UserData>({} as UserData);
+  
 
   const handleSubmit = () => {
     fetch(`/api/login`, {
@@ -43,21 +62,72 @@ export default function Login() {
 
   // Todo build
   return (
-    <Centered>
-      <Paper className={classes.paper}>
-        <Input
+    <Container component="main" maxWidth="xs">
+    <CssBaseline />
+    <div className={classes.paper}>
+      <Avatar className={classes.avatar}>
+        <LockOutlinedIcon />
+      </Avatar>
+      <Typography component="h1" variant="h5">
+        Sign in
+      </Typography>
+      <form className={classes.form} noValidate>
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="email"
+          label="Email Address"
+          name="email"
+          autoComplete="email"
+          autoFocus
           type='email'
           value={data.email}
           onChange={(e) => setData({ ...data, email: e.target.value })}
         />
-        <br />
-        <Input
-          type='password'
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          name="password"
+          label="Password"
+          type="password"
+          id="password"
+          autoComplete="current-password"
           value={data.password}
           onChange={(e) => setData({ ...data, password: e.target.value })}
         />
-        <Button onClick={handleSubmit}>Login</Button>
-      </Paper>
-    </Centered>
+        <FormControlLabel
+          control={<Checkbox value="remember" color="primary" />}
+          label="Remember me"
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          onClick={handleSubmit}
+        >
+          Sign In
+        </Button>
+        <Grid container>
+          <Grid item xs>
+            <Link href="#" variant="body2">
+              Forgot password?
+            </Link>
+          </Grid>
+          <Grid item>
+            <Link href="/auth/register" variant="body2">
+              {"Don't have an account? Register"}
+            </Link>
+          </Grid>
+        </Grid>
+      </form>
+    </div>
+   
+  </Container>
   );
 }
