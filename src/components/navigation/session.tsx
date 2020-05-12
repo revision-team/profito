@@ -23,6 +23,9 @@ export default function TrySession() {
   const { dispatch } = useContext(Store);
   const { data, loading, error } = useQuery<QueryType>(QUERY_USER);
 
+  const session = localStorage.getItem("session");
+  if (session) return <Redirect to='/auth/login' />;
+
   if (error) return <Redirect to='/auth/login' />;
 
   if (data) {
