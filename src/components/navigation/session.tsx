@@ -24,7 +24,7 @@ export default function TrySession() {
   const { data, loading, error } = useQuery<QueryType>(QUERY_USER);
 
   const session = localStorage.getItem("session");
-  if (session) return <Redirect to='/auth/login' />;
+  if (session !== "active") return <Redirect to='/auth/login' />;
 
   if (error) return <Redirect to='/auth/login' />;
 
