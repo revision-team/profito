@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core";
 import { Store } from "store";
 import clsx from "clsx";
 import Chats from "./chats";
+import NavIcons from "./navIcons";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   },
   icons: {
-    flex: "0 0 60px",
+    flex: "0 0 80px",
     backgroundColor: theme.palette.background.paper,
   },
   chatHide: {
@@ -47,11 +48,9 @@ export const Home: FunctionComponent = (props) => {
     <div className={classes.container}>
       {/* ICONS */}
       <div className={classes.icons}>
-        <Scrollbars
-          autoHide
-          universal
-          renderThumbVertical={ScrollVertical}
-        ></Scrollbars>
+        <Scrollbars autoHide universal renderThumbVertical={ScrollVertical}>
+          <NavIcons />
+        </Scrollbars>
       </div>
       {/* CHAT */}
       <div

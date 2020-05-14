@@ -8,10 +8,10 @@ import {
   Theme,
   Button,
 } from "@material-ui/core";
-import ChatIcon from "@material-ui/icons/Chat";
 import TrySession from "./session";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { ToggleShowChat, ClsSession } from "store/actions";
+import { MessageIcon } from "components/icons";
 
 const useStyles = makeStyles((theme: Theme) => ({
   grow: {
@@ -62,7 +62,7 @@ const Navigation: FunctionComponent = (props) => {
             aria-label='menu'
             onClick={handleToggleShowChat}
           >
-            <ChatIcon />
+            <MessageIcon />
           </IconButton>
         )}
         <div className={classes.grow} />

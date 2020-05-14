@@ -15,9 +15,13 @@ const Register = lazy(() => import("./views/registration/register"));
 const Payments = lazy(() => import("./views/payments"));
 const PaymentsEdit = lazy(() => import("./views/payments/edit"));
 const PaymentsCreate = lazy(() => import("./views/payments/create"));
-const Shopifies = lazy(() => import("./views/resources/shopify"));
-const ShopifiesEdit = lazy(() => import("./views/resources/shopify/edit"));
-const ShopifiesCreate = lazy(() => import("./views/resources/shopify/create"));
+
+const Integrations = lazy(() => import("views/integrations"));
+const Shopifies = lazy(() => import("./views/integrations/shopify"));
+const ShopifiesEdit = lazy(() => import("./views/integrations/shopify/edit"));
+const ShopifiesCreate = lazy(() =>
+  import("./views/integrations/shopify/create")
+);
 
 export default function Routes() {
   return (
@@ -44,16 +48,19 @@ function HomeComponent() {
         <Route exact path='/payments/create' component={PaymentsCreate} />
         <Route exact path='/payments/:id/edit' component={PaymentsEdit} />
 
-        {/* RESOURCES SHOPIFY */}
-        <Route exact path='/resources/shopify' component={Shopifies} />
+        {/* INTEGRATIONS */}
+        <Route exact path='/integrations' component={Integrations} />
+
+        {/* INTEGRATIONS SHOPIFY */}
+        <Route exact path='/integrations/shopify' component={Shopifies} />
         <Route
           exact
-          path='/resources/shopify/create'
+          path='/integrations/shopify/create'
           component={ShopifiesCreate}
         />
         <Route
           exact
-          path='/resources/shopify/:id/edit'
+          path='/integrations/shopify/:id/edit'
           component={ShopifiesEdit}
         />
 
