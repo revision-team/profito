@@ -22,6 +22,7 @@ const ShopifiesEdit = lazy(() => import("./views/integrations/shopify/edit"));
 const ShopifiesCreate = lazy(() =>
   import("./views/integrations/shopify/create")
 );
+const Ads = lazy(() => import("views/integrations/google_ads"));
 
 export default function Routes() {
   return (
@@ -54,15 +55,15 @@ function HomeComponent() {
         {/* INTEGRATIONS SHOPIFY */}
         <Route exact path='/integrations/shopify' component={Shopifies} />
         <Route
-          exact
           path='/integrations/shopify/create'
           component={ShopifiesCreate}
         />
         <Route
-          exact
           path='/integrations/shopify/:id/edit'
           component={ShopifiesEdit}
         />
+        {/* INTEGRATIONS GOOGLE ADDS */}
+        <Route exact path='/integrations/google_ads' component={Ads} />
 
         <Redirect from='*' to='/dashboard' />
       </Switch>
