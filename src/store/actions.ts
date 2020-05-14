@@ -1,8 +1,47 @@
-import { Notification, DateRange } from "./types";
+import { Notification, DateRange, AvailableTheme } from "./types";
+import { UserSession } from "models/users";
 
 // Action interface
 export interface IAction {
   type: string;
+}
+
+// *************
+// THEME ACTIONS
+// *************
+
+export const SET_THEME = "set_theme";
+export const TOGGLE_THEME = "toggle_theme";
+
+export interface IThemeAction extends IAction {
+  payload: AvailableTheme;
+}
+
+export function SetTheme(theme: AvailableTheme): IThemeAction {
+  return { type: SET_THEME, payload: theme };
+}
+
+export function ToggleTheme(): IAction {
+  return { type: TOGGLE_THEME };
+}
+
+// *****************
+// SHOW CHAT ACTIONS
+// *****************
+
+export const SET_CHAT = "set_chet";
+export const TOGGLE_CHAT = "toggle_chat";
+
+export interface IShowChatAction extends IAction {
+  payload: boolean;
+}
+
+export function SetShowChat(showChat: boolean): IShowChatAction {
+  return { type: SET_CHAT, payload: showChat };
+}
+
+export function ToggleShowChat(): IAction {
+  return { type: TOGGLE_CHAT };
 }
 
 // *********************
@@ -57,8 +96,37 @@ export function SetSelectedDateRange(range: DateRange): IDateRangeAction {
     payload: range,
   };
 }
+// ***************
+// SESSION ACTIONS
+// ***************
+
+export const SET_SESSION = "set_session";
+export const CLS_SESSION = "cls_session";
+
+export interface ISessionAction extends IAction {
+  payload: UserSession;
+}
+
+export function SetSession(user: UserSession): ISessionAction {
+  return {
+    type: SET_SESSION,
+    payload: user,
+  };
+}
+
+export function ClsSession(): IAction {
+  return {
+    type: CLS_SESSION,
+  };
+}
 
 // *****************
 // UNION TYPE ACTION
 // *****************
-export type Action = IAction | INotificationAction | IDateRangeAction;
+export type Action =
+  | IAction
+  | IThemeAction
+  | IShowChatAction
+  | INotificationAction
+  | IDateRangeAction
+  | ISessionAction;
