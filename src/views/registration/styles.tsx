@@ -64,6 +64,7 @@ export const loginStyles = makeStyles((theme: any) => ({
       height: 48,
       padding: '0 30px',
       fontWeight: 'bold',
+      minHeight: 60,
     },
   
   

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { GoogleIcon, FacebookIcon, LinkedinIcon } from "components/icons";
+import { GoogleIcon, FacebookIcon, TwitterIcon } from "components/icons";
 import { Input, Button, Link } from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -96,7 +96,7 @@ export default function Login() {
               }
             />
           </FormControl>
-          <Link href="#" style={{ float: 'right' }} >
+          <Link href="/auth/forgot" style={{ float: 'right' }} >
             Forgot password?
             </Link>
 
@@ -110,11 +110,11 @@ export default function Login() {
               <Grid item xs={12}  >
                 <Typography classes={{ root: classes.root }}>Or Sign Up Using</Typography>
                 <IconButton aria-label="add to favorites">
-                  <GoogleIcon />
+                  <FacebookIcon />
                 </IconButton>
 
                 <IconButton aria-label="add to favorites">
-                  <GoogleIcon />
+                  <TwitterIcon />
                 </IconButton>
 
                 <IconButton aria-label="add to favorites">

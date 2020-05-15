@@ -10,8 +10,13 @@ import RegistrationLayout from "layouts/registration";
 import Loading from "components/loading";
 import Dashboard from "views/dashboard";
 
-const Login = lazy(() => import("./views/registration/login"));
-const Register = lazy(() => import("./views/registration/register"));
+const Login          = lazy(() => import("./views/registration/login"));
+const Register       = lazy(() => import("./views/registration/register"));
+const ForgotPassword = lazy(() => import("./views/registration/forgotpassword"));
+const RestoreToken   = lazy(() => import("./views/registration/restoretoken"));
+const ResetPassword   = lazy(() => import("./views/registration/resetpassword"));
+
+
 const Payments = lazy(() => import("./views/payments"));
 const PaymentsEdit = lazy(() => import("./views/payments/edit"));
 const PaymentsCreate = lazy(() => import("./views/payments/create"));
@@ -76,6 +81,10 @@ function LoginComponent() {
       <Switch>
         <Route exact path='/auth/login' component={Login} />
         <Route exact path='/auth/register' component={Register} />
+        <Route exact path='/auth/forgot' component={ForgotPassword} />           
+        <Route exact path='/auth/restore/:token' component={RestoreToken} />   
+        <Route exact path='/auth/reset' component={ResetPassword} />   
+             
       </Switch>
     </RegistrationLayout>
   );
