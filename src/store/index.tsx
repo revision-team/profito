@@ -12,7 +12,7 @@ const initDateRange = {
 
 const initialState = {
   lang: "en",
-  theme: "dark",
+  theme: "light",
   showChat: false,
   session: {} as UserSession,
   notifications: [],

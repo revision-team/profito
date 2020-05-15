@@ -6,7 +6,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { Home as HomeLayout } from "layouts/home";
-import SessionLayout from "layouts/session";
+import RegistrationLayout from "layouts/registration";
 import Loading from "components/loading";
 import Dashboard from "views/dashboard";
 
@@ -72,11 +72,11 @@ function HomeComponent() {
 
 function LoginComponent() {
   return (
-    <SessionLayout>
+    <RegistrationLayout>
       <Switch>
         <Route exact path='/auth/login' component={Login} />
         <Route exact path='/auth/register' component={Register} />
       </Switch>
-    </SessionLayout>
+    </RegistrationLayout>
   );
 }
