@@ -5,10 +5,14 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { Home as HomeLayout } from "layouts/home";
+import { App as AppLayout } from "layouts/app";
 import SessionLayout from "layouts/session";
 import Loading from "components/loading";
 import Dashboard from "views/dashboard";
+
+const Privacy = lazy(() => import("views/home/privacy"));
+const Terms = lazy(() => import("views/home/terms"));
+const Home = lazy(() => import("views/home"));
 
 const Login = lazy(() => import("./views/registration/login"));
 const Register = lazy(() => import("./views/registration/register"));
@@ -30,6 +34,7 @@ export default function Routes() {
       <Suspense fallback={<Loading />}>
         <Switch>
           <Route path='/auth' render={() => <LoginComponent />} />
+          <Route path='/app' render={() => <AppComponent />} />
           <Route path='/' render={() => <HomeComponent />} />
         </Switch>
       </Suspense>
@@ -39,35 +44,46 @@ export default function Routes() {
 
 function HomeComponent() {
   return (
-    <HomeLayout>
+    <Switch>
+      <Route exact path='/' component={Home} />
+      <Route exact path='/privacy' component={Privacy} />
+      <Route exact path='/terms' component={Terms} />
+      <Redirect from='*' to='/' />
+    </Switch>
+  );
+}
+
+function AppComponent() {
+  return (
+    <AppLayout>
       <Switch>
         {/* DASHBOARD */}
-        <Route exact path='/dashboard' component={Dashboard} />
+        <Route exact path='/app/dashboard' component={Dashboard} />
 
         {/* PAYMENTS */}
-        <Route exact path='/payments' component={Payments} />
-        <Route exact path='/payments/create' component={PaymentsCreate} />
-        <Route exact path='/payments/:id/edit' component={PaymentsEdit} />
+        <Route exact path='/app/payments' component={Payments} />
+        <Route exact path='/app/payments/create' component={PaymentsCreate} />
+        <Route exact path='/app/payments/:id/edit' component={PaymentsEdit} />
 
         {/* INTEGRATIONS */}
-        <Route exact path='/integrations' component={Integrations} />
+        <Route exact path='/app/integrations' component={Integrations} />
 
         {/* INTEGRATIONS SHOPIFY */}
-        <Route exact path='/integrations/shopify' component={Shopifies} />
+        <Route exact path='/app/integrations/shopify' component={Shopifies} />
         <Route
-          path='/integrations/shopify/create'
+          path='/app/integrations/shopify/create'
           component={ShopifiesCreate}
         />
         <Route
-          path='/integrations/shopify/:id/edit'
+          path='/app/integrations/shopify/:id/edit'
           component={ShopifiesEdit}
         />
         {/* INTEGRATIONS GOOGLE ADDS */}
-        <Route exact path='/integrations/google_ads' component={Ads} />
+        <Route exact path='/app/integrations/google_ads' component={Ads} />
 
-        <Redirect from='*' to='/dashboard' />
+        <Redirect from='*' to='/app/dashboard' />
       </Switch>
-    </HomeLayout>
+    </AppLayout>
   );
 }
 

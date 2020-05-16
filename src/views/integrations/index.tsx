@@ -51,8 +51,8 @@ export default function Integrations() {
         alignItems='center'
         spacing={4}
       >
-        <IntegrationCard image={shopify} route='/integrations/shopify' />
-        <IntegrationCard image={google} route='/integrations/google_ads' />
+        <IntegrationCard image={shopify} route='/app/integrations/shopify' />
+        <IntegrationCard image={google} route='/app/integrations/google_ads' />
       </Grid>
     </div>
   );

@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Home: FunctionComponent = (props) => {
+export const App: FunctionComponent = (props) => {
   const { state } = useContext(Store);
   const classes = useStyles();
 
