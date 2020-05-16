@@ -7,6 +7,7 @@ import { Store } from "store";
 import clsx from "clsx";
 import Chats from "./chats";
 import NavIcons from "./navIcons";
+import TrySession from "components/session/session";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -43,6 +44,11 @@ const useStyles = makeStyles((theme) => ({
 export const Home: FunctionComponent = (props) => {
   const { state } = useContext(Store);
   const classes = useStyles();
+
+  const session = localStorage.getItem("session");
+  if (session !== "active" || !state.session.email) {
+    return <TrySession />;
+  }
 
   return (
     <div className={classes.container}>

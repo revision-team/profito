@@ -8,7 +8,7 @@ import {
   Theme,
   Button,
 } from "@material-ui/core";
-import TrySession from "./session";
+import TrySession from "../session/session";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { ToggleShowChat, ClsSession } from "store/actions";
 import { MessageIcon } from "components/icons";
@@ -35,11 +35,6 @@ const Navigation: FunctionComponent = (props) => {
   const classes = useStyles();
 
   const { state, dispatch } = useContext(Store);
-  const session = localStorage.getItem("session");
-
-  if (session !== "active" || !state.session.email) {
-    return <TrySession />;
-  }
 
   const mobileMenuId = "mobile_menu";
 
