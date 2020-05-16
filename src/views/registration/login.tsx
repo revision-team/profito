@@ -36,7 +36,7 @@ export default function Login() {
       .then((response) => {
         localStorage.setItem("session", "active");
         dispatch(SetSession(response as UserSession));
-        history.push(redirect ? redirect : "/dashboard");
+        history.push(redirect ? redirect : "/app/dashboard");
       })
       .catch((error) => console.log(error));
   };
