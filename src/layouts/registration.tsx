@@ -7,26 +7,21 @@ import { Centered } from "components/styled";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow1: 1,
+    flexGrow: 1,
   },
   paper: {
-    borderStyle: 'solid', borderWidth: '0px',
-    padding: theme.spacing(3),
+    padding: 40,
+    textAlign: "center",
     borderRadius: theme.spacing(2),
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(5),
     overflowY: "auto",
     overflowX: "auto",
   },
   gridContainer: {
-    backgroundImage: `url(${"/assets/images/bg-01.jpg"})`,
-    width: '100%',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    padding: '15px',
+    width: '100%', 
+    padding: 15,
     overflowY: "auto",
     overflowX: "auto",
-
   },
   gridItem: {
     color: 'black',
