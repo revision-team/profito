@@ -38,8 +38,8 @@ export default function Register() {
 
       <FormControl className={classes.inputs}>
         <IconInput
-          label='Username'
-          placeholder='Type your username'
+          label='Full Name'
+          placeholder='Type your full name'
           id='username-input'
           value={data.name}
           onChange={(s) => setData({ ...data, name: s })}
