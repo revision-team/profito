@@ -7,6 +7,8 @@ import client from "./apollo";
 import StoreProvider from "store";
 
 import App from "App";
+
+import "typeface-roboto";
 import "./index.scss";
 
 ReactDOM.render(
