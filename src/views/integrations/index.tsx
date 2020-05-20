@@ -11,6 +11,16 @@ import { Link } from "react-router-dom";
 import shopify from "images/shopify.png";
 import google from "images/googleads2.png";
 
+export type Oauth = {
+  url: {
+    path: string;
+  };
+};
+
+export function openOauthWindow(path: string) {
+  window.open(path, "Integration", "height=600,width=700");
+}
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 200,
@@ -41,7 +51,6 @@ function IntegrationCard(props: IntegrationCardProps) {
 }
 
 export default function Integrations() {
-  const classes = useStyles();
   return (
     <div>
       <Grid
