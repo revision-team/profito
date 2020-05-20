@@ -9,9 +9,9 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   input: {
-    minWidth: 320,
-    marginTop: 15,
-    marginBottom: 7,
+    minWidth: theme.spacing(40),
+    marginTop: theme.spacing(1.7),
+    marginBottom: theme.spacing(1),
   },
 }));
 

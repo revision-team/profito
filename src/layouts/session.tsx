@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { Centered } from "components/styled";
-import { Paper, Typography, makeStyles } from "@material-ui/core";
+import { Paper, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
