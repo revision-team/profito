@@ -44,14 +44,10 @@ export const SHOPIFY_DESTROY = gql`
   }
 `;
 
-export const SHOPIFY_SYSTEM = gql`
-  {
-    shopify_system {
-      access_mode
-      api_key
-      nonce
-      redirect
-      scopes
+export const QUERY_SHOPIFY_OAUTH = gql`
+  query ShopifyOauth($store: String) {
+    url: oauth {
+      path: shopify(store: $store)
     }
   }
 `;
