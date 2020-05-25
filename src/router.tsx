@@ -21,11 +21,14 @@ const PaymentsEdit = lazy(() => import("./views/payments/edit"));
 const PaymentsCreate = lazy(() => import("./views/payments/create"));
 
 const Integrations = lazy(() => import("views/integrations"));
+
 const Shopifies = lazy(() => import("./views/integrations/shopify"));
 const ShopifiesEdit = lazy(() => import("./views/integrations/shopify/edit"));
 const ShopifiesCreate = lazy(() =>
   import("./views/integrations/shopify/create")
 );
+const ShopifiesOauth = lazy(() => import("views/integrations/shopify/_oauth"));
+
 const Ads = lazy(() => import("views/integrations/google_ads"));
 
 export default function Routes() {
@@ -78,6 +81,11 @@ function AppComponent() {
           path='/app/integrations/shopify/:id/edit'
           component={ShopifiesEdit}
         />
+        <Route
+          path='/app/integrations/shopify/:store/oauth'
+          component={ShopifiesOauth}
+        />
+
         {/* INTEGRATIONS GOOGLE ADDS */}
         <Route exact path='/app/integrations/google_ads' component={Ads} />
 
