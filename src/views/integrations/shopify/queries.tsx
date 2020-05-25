@@ -6,7 +6,6 @@ export const GET_SHOPIFIES = gql`
       id
       description
       store
-      token
     }
   }
 `;
