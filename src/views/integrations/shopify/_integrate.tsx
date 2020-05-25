@@ -2,7 +2,6 @@ import React, { useState, ChangeEvent } from "react";
 import { Centered } from "components/styled";
 import { QUERY_SHOPIFY_OAUTH } from "./queries";
 import { useQuery } from "@apollo/client";
-import Loading from "components/loading";
 import { Oauth, openOauthWindow } from "..";
 import { Input } from "@material-ui/core";
 
