@@ -1,6 +1,12 @@
 import { Notification, DateRange, AvailableTheme } from "./types";
 import { UserSession } from "models/users";
 
+
+export type AddTodoType = {
+  column: any;
+  todo: any;
+};
+
 // Action interface
 export interface IAction {
   type: string;
@@ -15,6 +21,14 @@ export const TOGGLE_THEME = "toggle_theme";
 
 export interface IThemeAction extends IAction {
   payload: AvailableTheme;
+}
+
+export interface IGenericAction extends IAction {
+  payload: any;
+}
+
+export interface IAddTodoAction extends IAction {
+  payload: AddTodoType;
 }
 
 export function SetTheme(theme: AvailableTheme): IThemeAction {
@@ -102,6 +116,8 @@ export function SetSelectedDateRange(range: DateRange): IDateRangeAction {
 
 export const SET_SESSION = "set_session";
 export const CLS_SESSION = "cls_session";
+export const UPDATE_TODO = "update_todo";
+export const ADD_TODO = "add_todo";
 
 export interface ISessionAction extends IAction {
   payload: UserSession;
@@ -121,6 +137,29 @@ export function ClsSession(): IAction {
 }
 
 // *****************
+// TODOs ACTION
+// *****************
+export function UpdateTodo(todo: any): IGenericAction {
+  return {
+    type: UPDATE_TODO,
+    payload: todo
+  };
+}
+
+
+
+export function AddTodo(todo: AddTodoType): IAddTodoAction {
+  return {
+    type: ADD_TODO,
+    payload: todo
+  };
+}
+
+
+
+
+
+// *****************
 // UNION TYPE ACTION
 // *****************
 export type Action =
@@ -129,4 +168,6 @@ export type Action =
   | IShowChatAction
   | INotificationAction
   | IDateRangeAction
-  | ISessionAction;
+  | ISessionAction
+  | IGenericAction
+  | IAddTodoAction;
