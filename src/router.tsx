@@ -27,6 +27,7 @@ const ShopifiesCreate = lazy(() =>
   import("./views/integrations/shopify/create")
 );
 const Ads = lazy(() => import("views/integrations/google_ads"));
+const Scheduler = lazy(() => import("views/scheduler"));
 
 export default function Routes() {
   return (
@@ -35,6 +36,7 @@ export default function Routes() {
         <Switch>
           <Route path='/auth' render={() => <LoginComponent />} />
           <Route path='/app' render={() => <AppComponent />} />
+          <Route path='/scheduler' render={() => <SchedulerComponent />} />
           <Route path='/' render={() => <HomeComponent />} />
         </Switch>
       </Suspense>
@@ -52,6 +54,16 @@ function HomeComponent() {
     </Switch>
   );
 }
+
+function SchedulerComponent() {
+  return (
+    <Switch>
+      <Route exact path='/scheduler' component={Scheduler} />
+      <Redirect from='*' to='/' />
+    </Switch>
+  );
+}
+
 
 function AppComponent() {
   return (
@@ -86,6 +98,7 @@ function AppComponent() {
     </AppLayout>
   );
 }
+
 
 function LoginComponent() {
   return (
