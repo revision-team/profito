@@ -1,12 +1,15 @@
 ///
 // src/components/board-column.tsx
 ///
-import * as React from 'react'
+import React, {useContext} from 'react'
 import { Droppable, DroppableProvided, DroppableStateSnapshot } from 'react-beautiful-dnd'
 import styled from 'styled-components'
 
 // Import BoardItem component
 import { BoardItem } from 'components/boardItem'
+
+import { AddTodo, AddTodoType } from "store/actions"
+import { Store } from "store"
 
 // Define types for board column element properties
 type BoardColumnProps = {
@@ -47,11 +50,23 @@ const BoardColumnContent = styled.div<BoardColumnContentStylesProps>`
   background-color: ${props => props.isDraggingOver ? '#aecde0' : null};
   border-radius: 4px;
 `
+const AddTodoButton = styled.div`
+    background-color: green;
+    
+    &: hover:{
+        background-color: red;
+    }
+`;
 
 
 
 // Create and export the BoardColumn component
 export const BoardColumn: React.FC<BoardColumnProps> = (props) => {
+    const { dispatch } = useContext(Store);
+
+    const Add = ()=>{
+        dispatch(AddTodo({column: props.column, todo: "Test"} as AddTodoType));
+    };
 
     const BoardColumnAction = (provided: DroppableProvided, snapshot: DroppableStateSnapshot) => (
         <BoardColumnContent
@@ -59,6 +74,9 @@ export const BoardColumn: React.FC<BoardColumnProps> = (props) => {
             ref={provided.innerRef}
             isDraggingOver={snapshot.isDraggingOver}
         >
+            <AddTodoButton onClick={Add}>
+                <h3>Add TODO</h3>
+            </AddTodoButton>
             {/* All board items belong into specific column. */}
             {props.items.map((item: any, index: number) => <BoardItem key={item.id} item={item} index={index} />)}
             {provided.placeholder}
