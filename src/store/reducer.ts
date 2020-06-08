@@ -17,6 +17,11 @@ import {
   SET_CHAT,
   IShowChatAction,
   TOGGLE_CHAT,
+  UPDATE_TODO,
+  ADD_TODO,
+  AddTodo,
+  IGenericAction,
+  IAddTodoAction,
 } from "./actions";
 import { UserSession } from "models/users";
 
@@ -76,6 +81,28 @@ export const reducer: React.Reducer<State, Action> = (state, action) => {
       return { ...state, session: {} as UserSession };
     }
 
+    case UPDATE_TODO: {
+      const { payload } = action as IGenericAction;
+      return {
+        ...state,
+        todo: payload,
+      };
+    }
+
+    case ADD_TODO: {
+      const { payload } = action as IAddTodoAction;
+      // El id se genera en el back y se pone aqui
+      const itemId = `item-${Math.round(Math.random() * 1000)}`;
+      const column = {
+        ...payload.column,
+        itemsIds: [itemId, ...payload.column.itemsIds],
+      };
+
+      const _state = { ...state };
+      _state.todo.items[itemId] = { id: itemId, content: payload.todo };
+      _state.todo.columns[column.id] = column;
+      return _state;
+    }
     // Nothing matched
     default: {
       return state;
