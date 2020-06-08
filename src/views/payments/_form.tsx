@@ -3,6 +3,13 @@ import { useQuery, useMutation, DocumentNode } from "@apollo/client";
 import { GET_CURRENCIES } from "./queries";
 import { useHistory } from "react-router-dom";
 import { Payment } from ".";
+import { Paper, makeStyles, Typography } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    padding: theme.spacing(2),
+  },
+}));
 
 export interface Currency {
   name: string;
@@ -20,6 +27,7 @@ export interface FormProps<T> {
 
 export default function Form(props: FormProps<Payment>) {
   const history = useHistory();
+  const classes = useStyles();
 
   const [element, setElement] = useState<Payment>({ ...props.data });
 
@@ -46,5 +54,12 @@ export default function Form(props: FormProps<Payment>) {
   const selectFreqency = (e: ChangeEvent<HTMLElement>) =>
     setElement({ ...element, frequency: (e.target as HTMLInputElement).value });
 
-  return <></>;
+  return (
+    <React.Fragment>
+      <Paper className={classes.paper}>
+        <Typography variant='h5'>{props.heading}</Typography>
+        <Typography variant='subtitle2'>{props.subheading}</Typography>
+      </Paper>
+    </React.Fragment>
+  );
 }
