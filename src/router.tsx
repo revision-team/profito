@@ -14,8 +14,8 @@ const Privacy = lazy(() => import("views/home/privacy"));
 const Terms = lazy(() => import("views/home/terms"));
 const Home = lazy(() => import("views/home"));
 
-const Login = lazy(() => import("./views/registration/login"));
-const Register = lazy(() => import("./views/registration/register"));
+const Login = lazy(() => import("./views/session/login"));
+const Register = lazy(() => import("./views/session/register"));
 const Payments = lazy(() => import("./views/payments"));
 const PaymentsEdit = lazy(() => import("./views/payments/edit"));
 const PaymentsCreate = lazy(() => import("./views/payments/create"));
@@ -37,7 +37,7 @@ export default function Routes() {
     <Router>
       <Suspense fallback={<Loading />}>
         <Switch>
-          <Route path='/auth' render={() => <LoginComponent />} />
+          <Route path='/session' render={() => <SessionComponent />} />
           <Route path='/app' render={() => <AppComponent />} />
           <Route path='/scheduler' render={() => <SchedulerComponent />} />
           <Route path='/' render={() => <HomeComponent />} />
@@ -66,7 +66,6 @@ function SchedulerComponent() {
     </Switch>
   );
 }
-
 
 function AppComponent() {
   return (
@@ -107,13 +106,13 @@ function AppComponent() {
   );
 }
 
-
-function LoginComponent() {
+function SessionComponent() {
   return (
     <SessionLayout>
       <Switch>
-        <Route exact path='/auth/login' component={Login} />
-        <Route exact path='/auth/register' component={Register} />
+        <Route exact path='/session/login' component={Login} />
+        <Route exact path='/session/register' component={Register} />
+        <Redirect to='/session/login' />
       </Switch>
     </SessionLayout>
   );

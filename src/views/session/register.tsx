@@ -28,7 +28,7 @@ export default function Register() {
       method: "POST",
       body: JSON.stringify(data),
     }).then(() => {
-      history.push("/auth/login");
+      history.push("/session/login");
     });
   };
 
@@ -76,7 +76,7 @@ export default function Register() {
           <LockIcon />
         </IconInput>
 
-        <Link to='/auth/login' className={classes.inputs}>
+        <Link to='/session/login' className={classes.inputs}>
           <Typography variant='subtitle2'>
             Already have an account? Login
           </Typography>

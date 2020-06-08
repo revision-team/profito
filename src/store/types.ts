@@ -1,5 +1,5 @@
 import { UserSession } from "models/users";
-import { type } from "os";
+import { Action } from "./actions";
 
 export type AvailableTheme = "light" | "dark";
 
@@ -15,10 +15,15 @@ export class DateRange {
   ) {}
 }
 
-export interface EnvirormentTodo{
-  items : any,
-  columns: any,
-  columnsOrder: any
+export interface EnvirormentTodo {
+  items: any;
+  columns: any;
+  columnsOrder: any;
+}
+
+export interface StoreType {
+  state: State;
+  dispatch: React.Dispatch<Action>;
 }
 
 export interface State {
@@ -33,5 +38,5 @@ export interface State {
   selectedRange: DateRange;
   // COLLECTIONS
   notifications: Notification[];
-  todo: EnvirormentTodo
+  todo: EnvirormentTodo;
 }

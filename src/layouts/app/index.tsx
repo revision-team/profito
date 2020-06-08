@@ -7,7 +7,7 @@ import { Store } from "store";
 import clsx from "clsx";
 import Chats from "./chats";
 import NavIcons from "./navIcons";
-import TrySession from "components/session/session";
+import WithSession from "components/session/session";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -45,37 +45,34 @@ export const App: FunctionComponent = (props) => {
   const { state } = useContext(Store);
   const classes = useStyles();
 
-  const session = localStorage.getItem("session");
-  if (session !== "active" || !state.session.email) {
-    return <TrySession />;
-  }
-
   return (
-    <div className={classes.container}>
-      {/* ICONS */}
-      <div className={classes.icons}>
-        <Scrollbars autoHide universal renderThumbVertical={ScrollVertical}>
-          <NavIcons />
-        </Scrollbars>
-      </div>
-      {/* CHAT */}
-      <div
-        className={clsx({
-          [classes.chatHide]: !state.showChat,
-          [classes.chatShow]: state.showChat,
-        })}
-      >
-        <Chats />
-      </div>
-      {/* MAIN BOARD */}
-      <div className={classes.content}>
-        <Navigation />
-        <div className={classes.board}>
+    <WithSession redirect='/session'>
+      <div className={classes.container}>
+        {/* ICONS */}
+        <div className={classes.icons}>
           <Scrollbars autoHide universal renderThumbVertical={ScrollVertical}>
-            <div className={classes.boardContent}>{props.children}</div>
+            <NavIcons />
           </Scrollbars>
         </div>
+        {/* CHAT */}
+        <div
+          className={clsx({
+            [classes.chatHide]: !state.showChat,
+            [classes.chatShow]: state.showChat,
+          })}
+        >
+          <Chats />
+        </div>
+        {/* MAIN BOARD */}
+        <div className={classes.content}>
+          <Navigation />
+          <div className={classes.board}>
+            <Scrollbars autoHide universal renderThumbVertical={ScrollVertical}>
+              <div className={classes.boardContent}>{props.children}</div>
+            </Scrollbars>
+          </div>
+        </div>
       </div>
-    </div>
+    </WithSession>
   );
 };

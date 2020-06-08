@@ -1,37 +1,66 @@
-import { UserSession } from "models/users";
-import { gql, useQuery } from "@apollo/client";
+import React from "react";
+import { FunctionComponent, useContext } from "react";
 import { Store } from "store";
-import React, { useContext } from "react";
-import { Redirect } from "react-router-dom";
-import { SetSession } from "store/actions";
+import { Redirect, useHistory } from "react-router-dom";
 import Loading from "components/loading";
+import { SetSession, ClsSession } from "store/actions";
+import { UserSession } from "models/users";
+import { StoreType } from "store/types";
 
-type QueryType = {
-  session: UserSession;
+export type SessionQueryType = {
+  data: {
+    session: UserSession;
+  };
 };
 
-const QUERY_USER = gql`
-  {
-    session: user_current {
-      email
-      name
-    }
+export const SESSION_QUERY = `
+{
+  session: user_current {
+    email
+    name
   }
+}
 `;
 
-export default function TrySession() {
-  const { dispatch } = useContext(Store);
-  const { data, loading, error } = useQuery<QueryType>(QUERY_USER);
+const INACTIVE_SESSION = "inactive";
+const ACTIVE_SESSION = "active";
+const SESSION_KEY = "session";
 
-  const session = localStorage.getItem("session");
-  if (!session || session !== "active") return <Redirect to='/auth/login' />;
+export function LoginSession() {
+  localStorage.setItem(SESSION_KEY, ACTIVE_SESSION);
+}
 
-  if (error) return <Redirect to='/auth/login' />;
+export function LogoutSession(context: StoreType) {
+  context.dispatch(ClsSession());
+  localStorage.setItem(SESSION_KEY, INACTIVE_SESSION);
+}
 
-  if (data) {
-    localStorage.setItem("session", "active");
-    dispatch(SetSession(data.session));
+interface WithSessionProps {
+  redirect: string;
+}
+
+const WithSession: FunctionComponent<WithSessionProps> = (props) => {
+  const history = useHistory();
+  const { state, dispatch } = useContext(Store);
+  const session = localStorage.getItem(SESSION_KEY);
+
+  if (session === INACTIVE_SESSION) {
+    return <Redirect to={props.redirect} />;
   }
 
-  return <React.Fragment>{loading && <Loading />}</React.Fragment>;
-}
+  const sessionLoaded = state.session.email !== undefined;
+
+  if (!sessionLoaded) {
+    fetch(`/api/graphql?query=${SESSION_QUERY}`)
+      .then((r) => r.json())
+      .then((r: SessionQueryType) => {
+        dispatch(SetSession(r.data.session));
+        LoginSession();
+      })
+      .catch(() => history.push(props.redirect));
+  }
+
+  return <>{sessionLoaded ? props.children : <Loading />}</>;
+};
+
+export default WithSession;

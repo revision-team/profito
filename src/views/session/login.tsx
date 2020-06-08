@@ -120,7 +120,7 @@ export default function Login() {
 
         <div className={classes.signupLink}>
           <Typography variant='subtitle1'>Or Sign Up Using</Typography>
-          <Link to='/auth/register'>
+          <Link to='/session/register'>
             <Button>Sign Up</Button>
           </Link>
         </div>
