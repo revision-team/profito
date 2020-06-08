@@ -1,4 +1,5 @@
 import { UserSession } from "models/users";
+import { type } from "os";
 
 export type AvailableTheme = "light" | "dark";
 
@@ -14,6 +15,12 @@ export class DateRange {
   ) {}
 }
 
+export interface EnvirormentTodo{
+  items : any,
+  columns: any,
+  columnsOrder: any
+}
+
 export interface State {
   // SYSTEM
   lang: string;
@@ -26,4 +33,5 @@ export interface State {
   selectedRange: DateRange;
   // COLLECTIONS
   notifications: Notification[];
+  todo: EnvirormentTodo
 }
