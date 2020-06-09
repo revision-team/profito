@@ -9601,6 +9601,13 @@ react-list@^0.8.13:
   dependencies:
     prop-types "15"
 
+react-new-window@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/react-new-window/-/react-new-window-0.1.2.tgz#8c04392e669b16e64d68f46bb9d58666e4f753d4"
+  integrity sha512-KfjR6QupGf4UZCK7ittUE7r53eOax9mw0ODQIhDSxu4dzxWgeE9y95MRs8Dr9m/F7Plm3LUvccO5yGbg3619yA==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-prismic-cms@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/react-prismic-cms/-/react-prismic-cms-0.3.1.tgz#63357769076514b51f2429bd31f1baaf81057e7a"

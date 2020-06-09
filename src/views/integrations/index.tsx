@@ -6,10 +6,32 @@ import {
   CardActionArea,
   makeStyles,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import NewWindow, { IWindowFeatures } from "react-new-window";
 
 import shopify from "images/shopify.png";
 import google from "images/googleads2.png";
+
+// POPUP PROPS
+const windowFeatures = {
+  width: 500,
+  height: 500,
+} as IWindowFeatures;
+
+export interface Session {
+  description: string;
+  id: string;
+  role: string;
+  edges: {
+    session: {
+      id: string;
+    };
+  };
+}
+
+export interface SessionRequest {
+  sessions: Session[];
+}
 
 export type Oauth = {
   url: {
@@ -17,8 +39,29 @@ export type Oauth = {
   };
 };
 
-export function openOauthWindow(path: string) {
-  window.open(path, "Integration", "height=600,width=700");
+interface OauthWindowProps {
+  open?: boolean;
+  url: string;
+}
+
+export function OauthWindow(props: OauthWindowProps) {
+  const history = useHistory();
+  const { open, url } = props;
+
+  const handleUnload = () => history.push("/app/integrations/shopify");
+
+  return (
+    <>
+      {open && (
+        <NewWindow
+          url={url}
+          onUnload={handleUnload}
+          features={windowFeatures}
+          center='screen'
+        />
+      )}
+    </>
+  );
 }
 
 const useStyles = makeStyles((theme) => ({

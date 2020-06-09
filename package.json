@@ -33,6 +33,7 @@
     "react-custom-scrollbars": "^4.2.1",
     "react-date-range": "^1.0.3",
     "react-dom": "^16.13.1",
+    "react-new-window": "^0.1.2",
     "react-prismic-cms": "^0.3.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { Shopify } from "./index";
 import { FormProps } from "views/payments/_form";
 import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
+import { Session } from "views/integrations";
 
 export interface Currency {
   name: string;
   acronym: string;
 }
 
-export default function Form(props: FormProps<Shopify>) {
+export default function Form(props: FormProps<Session>) {
   const history = useHistory();
 
   const [element, setElement] = useState({ ...props.data });

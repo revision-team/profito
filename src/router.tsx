@@ -27,7 +27,6 @@ const ShopifiesEdit = lazy(() => import("./views/integrations/shopify/edit"));
 const ShopifiesCreate = lazy(() =>
   import("./views/integrations/shopify/create")
 );
-const ShopifiesOauth = lazy(() => import("views/integrations/shopify/_oauth"));
 
 const Ads = lazy(() => import("views/integrations/google_ads"));
 const Scheduler = lazy(() => import("views/scheduler"));
@@ -91,10 +90,6 @@ function AppComponent() {
         <Route
           path='/app/integrations/shopify/:id/edit'
           component={ShopifiesEdit}
-        />
-        <Route
-          path='/app/integrations/shopify/:store/oauth'
-          component={ShopifiesOauth}
         />
 
         {/* INTEGRATIONS GOOGLE ADDS */}

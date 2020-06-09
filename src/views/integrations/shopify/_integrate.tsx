@@ -1,11 +1,17 @@
 import React, { useState, ChangeEvent } from "react";
 import { Centered } from "components/styled";
-import { Input } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { InputAdornment, OutlinedInput, makeStyles } from "@material-ui/core";
+import { useQuery } from "@apollo/client";
+import { QUERY_SHOPIFY_OAUTH } from "./queries";
+import { Oauth, OauthWindow } from "views/integrations";
 
 export default function Integrate() {
-  const history = useHistory();
   const [store, setStore] = useState("stonesdev");
+  const [openWindow, setOpenWindow] = useState(false);
+
+  const { data } = useQuery<Oauth>(QUERY_SHOPIFY_OAUTH, {
+    variables: { store: `${store}.myshopify.com` },
+  });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setStore(e.target.value);
@@ -13,18 +19,22 @@ export default function Integrate() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    history.push(`/app/integrations/shopify/${store}/oauth`);
+    setOpenWindow(true);
   };
 
   return (
     <Centered>
       <form onSubmit={handleSubmit}>
-        <Input
-          placeholder='Type store name'
+        <OutlinedInput
+          endAdornment={
+            <InputAdornment position='end'>.myshopify.com</InputAdornment>
+          }
           value={store}
           onChange={handleChange}
+          autoFocus
         />
       </form>
+      {data && <OauthWindow open={openWindow} url={data.url.path} />}
     </Centered>
   );
 }
