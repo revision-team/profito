@@ -50,7 +50,7 @@ interface BadgeAvatarProps {
 export default function BadgeAvatars(props: BadgeAvatarProps) {
   const classes = useStyles();
 
-  console.log(props.online);
+  const avatar = <Avatar alt={props.alt} src={props.src} />;
 
   return (
     <div className={classes.root}>
@@ -63,10 +63,10 @@ export default function BadgeAvatars(props: BadgeAvatarProps) {
           }}
           variant="dot"
         >
-          <Avatar alt={props.alt} src={props.src} />
+          {avatar}
         </StyledBadge>
       ) : (
-        <Avatar alt={props.alt} src={props.src} />
+        avatar
       )}
     </div>
   );

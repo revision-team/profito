@@ -18,7 +18,7 @@ const users: User[] = [
   },
   {
     name: "Sue Fidalgo",
-    avatar: "/avatars/2.png",
+    avatar: "/avatars/222.png",
     caption: "",
     online: false,
   },
@@ -46,6 +46,54 @@ const users: User[] = [
     caption: "You are doing well, congratulations!",
     online: true,
   },
+  {
+    name: "James Mars",
+    avatar: "/avatars/13.png",
+    caption: "Yep! I saw it!",
+    online: true,
+  },
+  {
+    name: "Susan Malebow",
+    avatar: "/avatars/8.png",
+    caption: "",
+    online: false,
+  },
+  {
+    name: "Tatiana Loops",
+    avatar: "/avatars/12.png",
+    caption: "Yep! I saw it!",
+    online: true,
+  },
+  {
+    name: "Fatima McMillan",
+    avatar: "/avatars/1000.png",
+    caption: "",
+    online: true,
+  },
+  {
+    name: "Luis Homt",
+    avatar: "/avatars/11.png",
+    caption: "Yep! I saw it!",
+    online: true,
+  },
+  {
+    name: "Dave Atkins",
+    avatar: "/avatars/9.png",
+    caption: "",
+    online: false,
+  },
+  {
+    name: "Jessica Reainks",
+    avatar: "/avatars/7.png",
+    caption: "Yep! I saw it!",
+    online: true,
+  },
+  {
+    name: "Sue Fidalgo",
+    avatar: "/avatars/14.png",
+    caption: "",
+    online: false,
+  },
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -56,11 +104,15 @@ const useStyles = makeStyles((theme) => ({
   board: {
     height: "calc(100% - 50px)",
     width: "100%",
+    marginTop: theme.spacing(2),
   },
   search: {
     height: 49,
     width: "100%",
     textAlign: "right",
+  },
+  chats: {
+    marginRight: theme.spacing(3),
   },
 }));
 
@@ -96,9 +148,11 @@ export default function Chats() {
           <Divider />
           <div className={classes.board}>
             <Scrollbars autoHide universal renderThumbVertical={ScrollVertical}>
-              {users.map((u) => (
-                <Chat user={u} />
-              ))}
+              <div className={classes.chats}>
+                {users.map((u) => (
+                  <Chat user={u} />
+                ))}
+              </div>
             </Scrollbars>
           </div>
         </div>

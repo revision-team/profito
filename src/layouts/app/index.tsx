@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     "flex-grow": "0.3",
     transition: "flex-grow .5s",
     backgroundColor: theme.palette.background.paper,
+    opacity: 0.8,
   },
   content: {
     flex: "1 1 auto",
@@ -46,7 +47,7 @@ export const App: FunctionComponent = (props) => {
   const classes = useStyles();
 
   return (
-    <WithSession redirect='/session'>
+    <WithSession redirect="/session">
       <div className={classes.container}>
         {/* ICONS */}
         <div className={classes.icons}>
