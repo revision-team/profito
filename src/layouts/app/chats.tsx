@@ -127,7 +127,7 @@ export default function Chats() {
       {state.showChat && (
         <div className={classes.container}>
           <div className={classes.search}>
-            {/* <SearchBar
+            <SearchBar
               onChange={() => console.log("onChange")}
               onRequestSearch={() => console.log("onRequestSearch")}
               style={{
@@ -135,7 +135,7 @@ export default function Chats() {
                 maxWidth: 800,
                 width: "80%",
               }}
-            /> */}
+            />
             <IconButton
               edge="start"
               color="inherit"

@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
   },
   appBar: {
-    height: 50,
+    height: 65,
     paddingTop: 1,
     paddingLeft: 1,
   },
@@ -48,13 +48,13 @@ const Navigation: FunctionComponent = (props) => {
   };
 
   return (
-    <AppBar position='relative' className={classes.appBar}>
-      <Toolbar variant='dense'>
+    <AppBar position="relative" className={classes.appBar}>
+      <Toolbar>
         {state.showChat || (
           <IconButton
-            edge='start'
-            color='inherit'
-            aria-label='menu'
+            edge="start"
+            color="inherit"
+            aria-label="menu"
             onClick={handleToggleShowChat}
           >
             <MessageIcon />
@@ -64,11 +64,11 @@ const Navigation: FunctionComponent = (props) => {
         <Button onClick={handleLogout}>Logout</Button>
         <div className={classes.sectionMobile}>
           <IconButton
-            aria-label='show more'
+            aria-label="show more"
             aria-controls={mobileMenuId}
-            aria-haspopup='true'
+            aria-haspopup="true"
             onClick={handleMobileMenuOpen}
-            color='inherit'
+            color="inherit"
           >
             <MoreIcon />
           </IconButton>
