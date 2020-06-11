@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, CSSProperties } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -8,6 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
+import classnames from "classnames";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,12 +41,15 @@ interface SortedTableProps<T> {
   thead: { label?: string; sorted?: boolean; key: string }[];
   tbody: (e: T, key: any) => JSX.Element;
   sort: (collection: T[], order: Order, key: string) => T[];
+  style?: CSSProperties;
+  className?: string;
 }
 
 export default function SortedTable<T>(props: SortedTableProps<T>) {
   const classes = useStyles();
+  const { data: array, thead, tbody, sort, className, ...other } = props;
 
-  const [data, setData] = useState([...props.data]);
+  const [data, setData] = useState([...array]);
   const [order, setOrder] = useState<Order>("desc");
   const [key, setKey] = useState<string>("");
 
@@ -58,11 +62,11 @@ export default function SortedTable<T>(props: SortedTableProps<T>) {
   };
 
   useEffect(() => {
-    setData(props.sort(data, order, key));
-  }, [props, order, key]);
+    setData(sort(data, order, key));
+  }, [order, key]);
 
   return (
-    <Paper className={classes.paper}>
+    <Paper className={classnames(classes.paper, className)} {...other}>
       <TableContainer>
         <Table
           className={classes.table}
@@ -72,7 +76,7 @@ export default function SortedTable<T>(props: SortedTableProps<T>) {
         >
           <TableHead>
             <TableRow>
-              {props.thead.map((h) => (
+              {thead.map((h) => (
                 <TableCell
                   key={h.label || h.key}
                   // align={headCell.numeric ? 'right' : 'left'}
@@ -101,9 +105,7 @@ export default function SortedTable<T>(props: SortedTableProps<T>) {
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
-            {data.map((row, index) => props.tbody(row, index))}
-          </TableBody>
+          <TableBody>{data.map((row, index) => tbody(row, index))}</TableBody>
         </Table>
       </TableContainer>
     </Paper>

@@ -8,15 +8,26 @@ import {
 } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import NewWindow, { IWindowFeatures } from "react-new-window";
+import { gql } from "@apollo/client";
 
-import shopify from "images/shopify.png";
-import google from "images/googleads2.png";
+import shopify from "images/shopify logo vector.png";
+import google from "images/googleads.png";
 
-// POPUP PROPS
-const windowFeatures = {
-  width: 500,
-  height: 500,
-} as IWindowFeatures;
+// COMMON CODES
+export const GET_OAUTH_SESSIONS = gql`
+  query Sessions($source: String, $active: Boolean) {
+    sessions: oauth_sessions(source: $source, active: $active) {
+      id: key
+      role
+      description
+      edges {
+        session {
+          id: key
+        }
+      }
+    }
+  }
+`;
 
 export interface Session {
   description: string;
@@ -25,6 +36,7 @@ export interface Session {
   edges: {
     session: {
       id: string;
+      description: string;
     };
   };
 }
@@ -39,10 +51,16 @@ export type Oauth = {
   };
 };
 
+// NEW WINDOW
 interface OauthWindowProps {
   open?: boolean;
   url: string;
 }
+
+const windowFeatures = {
+  width: 500,
+  height: 500,
+} as IWindowFeatures;
 
 export function OauthWindow(props: OauthWindowProps) {
   const history = useHistory();
@@ -64,9 +82,11 @@ export function OauthWindow(props: OauthWindowProps) {
   );
 }
 
+// LIST VIEW
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 200,
+    width: 200,
+    height: 200,
   },
   media: {
     height: 200,
