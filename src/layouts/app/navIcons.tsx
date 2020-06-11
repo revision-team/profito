@@ -4,8 +4,8 @@ import NavIcon from "components/navigation/icon";
 
 import { makeStyles, Theme } from "@material-ui/core";
 import DashboardIcon from "@material-ui/icons/Dashboard";
+import PeopleIcon from "@material-ui/icons/People";
 import SettingsInputCompositeIcon from "@material-ui/icons/SettingsInputComposite";
-import PaymentIcon from "@material-ui/icons/Payment";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -21,8 +21,8 @@ export default function NavIcons() {
       <NavIcon text="Dashboard" route="/app/dashboard">
         <DashboardIcon />
       </NavIcon>
-      <NavIcon text="Payments" route="/app/payments">
-        <PaymentIcon />
+      <NavIcon text="Users" route="/app/integrations">
+        <PeopleIcon />
       </NavIcon>
       <NavIcon text="Integrations" route="/app/integrations">
         <SettingsInputCompositeIcon />

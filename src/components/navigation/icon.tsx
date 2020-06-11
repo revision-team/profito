@@ -37,10 +37,10 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 10,
   },
   active: {
+    marginTop: theme.spacing(1),
     width: "0.25rem",
     height: 68,
     left: 0,
-    // float: "right",
     position: "absolute",
     backgroundColor: theme.palette.secondary.main,
     opacity: 0.8,

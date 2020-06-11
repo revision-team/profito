@@ -3,17 +3,8 @@ import clsx from "clsx";
 
 import BadgeAvatar from "components/chat/badgeavatar";
 
-import { Theme, makeStyles } from "@material-ui/core/styles";
-import {
-  Card,
-  CardHeader,
-  IconButton,
-  Collapse,
-  Slide,
-  CardContent,
-  CardActions,
-  Grow,
-} from "@material-ui/core";
+import { makeStyles, Theme } from "@material-ui/core/styles";
+import { Card, CardHeader, IconButton, Grow } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import PhoneIcon from "@material-ui/icons/Phone";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";

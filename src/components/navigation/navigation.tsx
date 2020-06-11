@@ -1,17 +1,16 @@
 import React, { useContext, FunctionComponent } from "react";
 import { Store } from "store";
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  makeStyles,
-  Theme,
-  Button,
-} from "@material-ui/core";
-import TrySession from "../session/session";
-import MoreIcon from "@material-ui/icons/MoreVert";
 import { ToggleShowChat, ClsSession } from "store/actions";
+
 import { MessageIcon } from "components/icons";
+import Menu from "components/navigation/menu";
+import Notifications from "components/navigation/notifications";
+import TrySession from "components/session/session";
+
+import { makeStyles, Theme } from "@material-ui/core/styles";
+import { AppBar, Toolbar, IconButton } from "@material-ui/core";
+import MoreIcon from "@material-ui/icons/MoreVert";
+import ForumIcon from "@material-ui/icons/Forum";
 
 const useStyles = makeStyles((theme: Theme) => ({
   grow: {
@@ -31,21 +30,21 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+const currentUser = {
+  name: "Joselyn Pretty",
+  avatar: "",
+  caption: "",
+  online: true,
+};
+
 const Navigation: FunctionComponent = (props) => {
   const classes = useStyles();
 
-  const { state, dispatch } = useContext(Store);
-
   const mobileMenuId = "mobile_menu";
-
   const handleMobileMenuOpen = () => {};
 
+  const { state, dispatch } = useContext(Store);
   const handleToggleShowChat = () => dispatch(ToggleShowChat());
-
-  const handleLogout = () => {
-    localStorage.setItem("session", "inactive");
-    dispatch(ClsSession());
-  };
 
   return (
     <AppBar position="relative" className={classes.appBar}>
@@ -57,11 +56,14 @@ const Navigation: FunctionComponent = (props) => {
             aria-label="menu"
             onClick={handleToggleShowChat}
           >
-            <MessageIcon />
+            <ForumIcon />
           </IconButton>
         )}
         <div className={classes.grow} />
-        <Button onClick={handleLogout}>Logout</Button>
+
+        <Notifications count={100} />
+        <Menu user={currentUser} />
+
         <div className={classes.sectionMobile}>
           <IconButton
             aria-label="show more"

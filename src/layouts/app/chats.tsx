@@ -1,13 +1,17 @@
 import React, { useContext } from "react";
-import { makeStyles, IconButton, Divider } from "@material-ui/core";
-import ScrollVertical from "components/scroll/vertical";
-import { Scrollbars } from "react-custom-scrollbars";
-import CloseIcon from "@material-ui/icons/Close";
 import { Store } from "store";
 import { ToggleShowChat } from "store/actions";
+
+import ScrollVertical from "components/scroll/vertical";
 import Chat from "components/chat/chat";
-import SearchBar from "material-ui-search-bar";
 import { User } from "components/chat/chat";
+// import SearchBar from "components/chat/searchBar";
+
+import { Scrollbars } from "react-custom-scrollbars";
+
+import { makeStyles, Theme } from "@material-ui/core/styles";
+import { IconButton, Divider, Grid } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 
 const users: User[] = [
   {
@@ -96,7 +100,7 @@ const users: User[] = [
   },
 ];
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   container: {
     height: "100%",
     width: "100%",
@@ -107,9 +111,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   search: {
-    height: 49,
-    width: "100%",
-    textAlign: "right",
+    height: 64,
+    textAlign: "center",
+    display: "inline-flex",
+    alignItems: "center",
   },
   chats: {
     marginRight: theme.spacing(3),
@@ -126,25 +131,29 @@ export default function Chats() {
     <React.Fragment>
       {state.showChat && (
         <div className={classes.container}>
-          <div className={classes.search}>
-            <SearchBar
-              onChange={() => console.log("onChange")}
-              onRequestSearch={() => console.log("onRequestSearch")}
-              style={{
-                margin: "0 auto",
-                maxWidth: 800,
-                width: "80%",
-              }}
-            />
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              onClick={handleToggleShowChat}
-            >
-              <CloseIcon />
-            </IconButton>
-          </div>
+          <Grid
+            container
+            alignItems="center"
+            justify="center"
+            className={classes.search}
+          >
+            <Grid item xs={10}>
+              {/* <SearchBar /> */}
+            </Grid>
+            <Grid item xs={2}>
+              <div className={classes.search}>
+                <IconButton
+                  edge="start"
+                  color="inherit"
+                  aria-label="menu"
+                  onClick={handleToggleShowChat}
+                >
+                  <CloseIcon />
+                </IconButton>
+              </div>
+            </Grid>
+          </Grid>
+
           <Divider />
           <div className={classes.board}>
             <Scrollbars autoHide universal renderThumbVertical={ScrollVertical}>
