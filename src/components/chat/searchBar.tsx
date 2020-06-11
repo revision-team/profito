@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { makeStyles, Theme, fade } from "@material-ui/core/styles";
 import { InputBase } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-import { stringify } from "querystring";
-import { __InputValue } from "graphql";
 
 const useStyles = makeStyles((theme: Theme) => ({
   search: {
