@@ -5,7 +5,7 @@ import { ToggleShowChat } from "store/actions";
 import ScrollVertical from "components/scroll/vertical";
 import Chat from "components/chat/chat";
 import { User } from "components/chat/chat";
-// import SearchBar from "components/chat/searchBar";
+import SearchBar from "components/chat/searchBar";
 
 import { Scrollbars } from "react-custom-scrollbars";
 
@@ -138,7 +138,7 @@ export default function Chats() {
             className={classes.search}
           >
             <Grid item xs={10}>
-              {/* <SearchBar /> */}
+              <SearchBar names={users.map((u) => u.name)} />
             </Grid>
             <Grid item xs={2}>
               <div className={classes.search}>
