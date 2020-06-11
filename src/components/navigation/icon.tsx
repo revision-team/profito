@@ -16,8 +16,8 @@ const useStyles = makeStyles((theme) => ({
   },
   icon: {
     marginTop: 10,
-    height: 32,
-    width: 32,
+    height: 45,
+    width: 45,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "rgba(255, 255, 255, .1)",
   },
   caption: {
-    fontSize: "0.625rem",
-    letterSpacing: "-0.2px",
+    fontSize: 13,
+    letterSpacing: "-0.3px",
     textAlign: "center",
     color: "#a4a7b5",
     marginBottom: 10,
@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
     // float: "right",
     position: "absolute",
     backgroundColor: theme.palette.secondary.main,
+    opacity: 0.8,
     borderRadius: 100,
   },
 }));
@@ -65,7 +66,7 @@ const NavIcon: FunctionComponent<NavIconProps> = (props) => {
       <div className={clsx(classes.icon, { [classes.activeIcon]: active })}>
         {props.children}
       </div>
-      <Typography variant='caption' className={classes.caption}>
+      <Typography variant="caption" className={classes.caption}>
         {props.text}
       </Typography>
       {active && <div className={classes.active} />}

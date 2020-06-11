@@ -12,6 +12,7 @@ import {
   Slide,
   CardContent,
   CardActions,
+  Grow,
 } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import PhoneIcon from "@material-ui/icons/Phone";
@@ -42,23 +43,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   expandOpenIcon: {
     transform: "rotate(180deg)",
   },
-  slide: {
-    maxWidth: 350,
-    width: "100%",
-    paddingRight: theme.spacing(3),
-    marginRight: theme.spacing(3),
-  },
+  slide: {},
   actions: {
-    // paddingRight: theme.spacing(3),
+    maxWidth: 350,
+    paddingRight: theme.spacing(3),
     boxShadow: "none",
     textAlign: "center",
-    marginTop: "-55px",
+    marginTop: "-58px",
     backgroundColor: "transparent",
-    // transition: "visibility 3s linear",
-    // overflow: "hidden",
-  },
-  actionsExpand: {
-    // visibility: "visible",
   },
   actionIcon: {
     margin: theme.spacing(0, 1),
@@ -94,7 +86,7 @@ export default function Chat(props: ChatProps) {
 
   const { user } = props;
   return (
-    <div className={classes.card}>
+    <React.Fragment>
       <Card
         className={clsx(classes.card, {
           [classes.cardExpand]: expanded,
@@ -128,13 +120,8 @@ export default function Chat(props: ChatProps) {
           }}
         />
       </Card>
-      {/* <div className={classes.slide}> */}
-      <Slide in={expanded} timeout={700} unmountOnExit direction="right">
-        <Card
-          className={clsx(classes.actions, {
-            [classes.actionsExpand]: expanded,
-          })}
-        >
+      <Grow in={expanded} timeout={400} unmountOnExit>
+        <Card className={classes.actions}>
           <IconButton aria-label="call friend" className={classes.actionIcon}>
             <PhoneIcon />
           </IconButton>
@@ -145,8 +132,7 @@ export default function Chat(props: ChatProps) {
             <ChatBubbleIcon />
           </IconButton>
         </Card>
-      </Slide>
-      {/* </div> */}
-    </div>
+      </Grow>
+    </React.Fragment>
   );
 }
