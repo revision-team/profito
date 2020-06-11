@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { DashboardIcon, SalesIcon, ApplicationIcon } from "components/icons";
 import NavIcon from "components/navigation/icon";
 
 import { makeStyles, Theme } from "@material-ui/core";
@@ -22,11 +21,9 @@ export default function NavIcons() {
         <DashboardIcon />
       </NavIcon>
       <NavIcon text="Payments" route="/app/payments">
-        {/* <SalesIcon /> */}
         <PaymentIcon />
       </NavIcon>
       <NavIcon text="Integrations" route="/app/integrations">
-        {/* <ApplicationIcon /> */}
         <SettingsInputCompositeIcon />
       </NavIcon>
     </div>
