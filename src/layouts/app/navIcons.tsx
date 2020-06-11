@@ -21,7 +21,7 @@ export default function NavIcons() {
       <NavIcon text="Dashboard" route="/app/dashboard">
         <DashboardIcon />
       </NavIcon>
-      <NavIcon text="Users" route="/app/integrations">
+      <NavIcon text="Users" route="/app/payments">
         <PeopleIcon />
       </NavIcon>
       <NavIcon text="Integrations" route="/app/integrations">
