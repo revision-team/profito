@@ -117,7 +117,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: "center",
   },
   chats: {
-    marginRight: theme.spacing(3),
+    padding: theme.spacing(0, 0, 5, 1),
   },
 }));
 
