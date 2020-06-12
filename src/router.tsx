@@ -36,10 +36,10 @@ export default function Routes() {
     <Router>
       <Suspense fallback={<Loading />}>
         <Switch>
-          <Route path='/session' render={() => <SessionComponent />} />
-          <Route path='/app' render={() => <AppComponent />} />
-          <Route path='/scheduler' render={() => <SchedulerComponent />} />
-          <Route path='/' render={() => <HomeComponent />} />
+          <Route path="/session" render={() => <SessionComponent />} />
+          <Route path="/app" render={() => <AppComponent />} />
+          <Route path="/scheduler" render={() => <SchedulerComponent />} />
+          <Route path="/" render={() => <HomeComponent />} />
         </Switch>
       </Suspense>
     </Router>
@@ -49,10 +49,10 @@ export default function Routes() {
 function HomeComponent() {
   return (
     <Switch>
-      <Route exact path='/' component={Home} />
-      <Route exact path='/privacy' component={Privacy} />
-      <Route exact path='/terms' component={Terms} />
-      <Redirect from='*' to='/' />
+      <Route exact path="/" component={Home} />
+      <Route exact path="/privacy" component={Privacy} />
+      <Route exact path="/terms" component={Terms} />
+      <Redirect from="*" to="/" />
     </Switch>
   );
 }
@@ -60,8 +60,8 @@ function HomeComponent() {
 function SchedulerComponent() {
   return (
     <Switch>
-      <Route exact path='/scheduler' component={Scheduler} />
-      <Redirect from='*' to='/' />
+      <Route exact path="/scheduler" component={Scheduler} />
+      <Redirect from="*" to="/" />
     </Switch>
   );
 }
@@ -71,31 +71,31 @@ function AppComponent() {
     <AppLayout>
       <Switch>
         {/* DASHBOARD */}
-        <Route exact path='/app/dashboard' component={Dashboard} />
+        <Route exact path="/app/dashboard" component={Dashboard} />
 
         {/* PAYMENTS */}
-        <Route exact path='/app/payments' component={Payments} />
-        <Route exact path='/app/payments/create' component={PaymentsCreate} />
-        <Route exact path='/app/payments/:id/edit' component={PaymentsEdit} />
+        <Route exact path="/app/payments" component={Payments} />
+        <Route exact path="/app/payments/create" component={PaymentsCreate} />
+        <Route exact path="/app/payments/:id/edit" component={PaymentsEdit} />
 
         {/* INTEGRATIONS */}
-        <Route exact path='/app/integrations' component={Integrations} />
+        <Route exact path="/app/integrations" component={Integrations} />
 
         {/* INTEGRATIONS SHOPIFY */}
-        <Route exact path='/app/integrations/shopify' component={Shopifies} />
+        <Route exact path="/app/integrations/shopify" component={Shopifies} />
         <Route
-          path='/app/integrations/shopify/create'
+          path="/app/integrations/shopify/create"
           component={ShopifiesCreate}
         />
         <Route
-          path='/app/integrations/shopify/:id/edit'
+          path="/app/integrations/shopify/:id/edit"
           component={ShopifiesEdit}
         />
 
         {/* INTEGRATIONS GOOGLE ADDS */}
-        <Route exact path='/app/integrations/google_ads' component={Ads} />
+        <Route exact path="/app/integrations/google_ads" component={Ads} />
 
-        <Redirect from='*' to='/app/dashboard' />
+        <Redirect from="*" to="/app/dashboard" />
       </Switch>
     </AppLayout>
   );
@@ -105,9 +105,9 @@ function SessionComponent() {
   return (
     <SessionLayout>
       <Switch>
-        <Route exact path='/session/login' component={Login} />
-        <Route exact path='/session/register' component={Register} />
-        <Redirect to='/session/login' />
+        <Route exact path="/session/login" component={Login} />
+        <Route exact path="/session/register" component={Register} />
+        <Redirect to="/session/login" />
       </Switch>
     </SessionLayout>
   );

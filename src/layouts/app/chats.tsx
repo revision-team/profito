@@ -1,12 +1,106 @@
 import React, { useContext } from "react";
-import { makeStyles, IconButton, Divider } from "@material-ui/core";
-import ScrollVertical from "components/scroll/vertical";
-import { Scrollbars } from "react-custom-scrollbars";
-import CloseIcon from "@material-ui/icons/Close";
 import { Store } from "store";
 import { ToggleShowChat } from "store/actions";
 
-const useStyles = makeStyles((theme) => ({
+import ScrollVertical from "components/scroll/vertical";
+import Chat from "components/chat/chat";
+import { User } from "components/chat/chat";
+import SearchBar from "components/chat/searchBar";
+
+import { Scrollbars } from "react-custom-scrollbars";
+
+import { makeStyles, Theme } from "@material-ui/core/styles";
+import { IconButton, Divider, Grid } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
+
+const users: User[] = [
+  {
+    name: "Emily Mars",
+    avatar: "/avatars/1.png",
+    caption: "Yep! I saw it!",
+    online: true,
+  },
+  {
+    name: "Sue Fidalgo",
+    avatar: "/avatars/222.png",
+    caption: "",
+    online: false,
+  },
+  {
+    name: "Karen Cats",
+    avatar: "/avatars/3.png",
+    caption: "Maybe, what do you think about it?",
+    online: false,
+  },
+  {
+    name: "Daniel Hans",
+    avatar: "/avatars/4.png",
+    caption: "Somewhere, I don't know",
+    online: true,
+  },
+  {
+    name: "Trin Mabble",
+    avatar: "/avatars/5.png",
+    caption: "",
+    online: false,
+  },
+  {
+    name: "Paula Jacobs",
+    avatar: "/avatars/6.png",
+    caption: "You are doing well, congratulations!",
+    online: true,
+  },
+  {
+    name: "James Mars",
+    avatar: "/avatars/13.png",
+    caption: "Yep! I saw it!",
+    online: true,
+  },
+  {
+    name: "Susan Malebow",
+    avatar: "/avatars/8.png",
+    caption: "",
+    online: false,
+  },
+  {
+    name: "Tatiana Loops",
+    avatar: "/avatars/12.png",
+    caption: "Yep! I saw it!",
+    online: true,
+  },
+  {
+    name: "Fatima McMillan",
+    avatar: "/avatars/1000.png",
+    caption: "",
+    online: true,
+  },
+  {
+    name: "Luis Homt",
+    avatar: "/avatars/11.png",
+    caption: "Yep! I saw it!",
+    online: true,
+  },
+  {
+    name: "Dave Atkins",
+    avatar: "/avatars/9.png",
+    caption: "",
+    online: false,
+  },
+  {
+    name: "Jessica Reainks",
+    avatar: "/avatars/7.png",
+    caption: "Yep! I saw it!",
+    online: true,
+  },
+  {
+    name: "Sue Fidalgo",
+    avatar: "/avatars/14.png",
+    caption: "",
+    online: false,
+  },
+];
+
+const useStyles = makeStyles((theme: Theme) => ({
   container: {
     height: "100%",
     width: "100%",
@@ -14,11 +108,16 @@ const useStyles = makeStyles((theme) => ({
   board: {
     height: "calc(100% - 50px)",
     width: "100%",
+    marginTop: theme.spacing(2),
   },
   search: {
-    height: 49,
-    width: "100%",
-    textAlign: "right",
+    height: 64,
+    textAlign: "center",
+    display: "inline-flex",
+    alignItems: "center",
+  },
+  chats: {
+    marginRight: theme.spacing(3),
   },
 }));
 
@@ -32,27 +131,37 @@ export default function Chats() {
     <React.Fragment>
       {state.showChat && (
         <div className={classes.container}>
-          <div className={classes.search}>
-            <IconButton
-              edge='start'
-              color='inherit'
-              aria-label='menu'
-              onClick={handleToggleShowChat}
-            >
-              <CloseIcon />
-            </IconButton>
-          </div>
+          <Grid
+            container
+            alignItems="center"
+            justify="center"
+            className={classes.search}
+          >
+            <Grid item xs={10}>
+              <SearchBar names={users.map((u) => u.name)} />
+            </Grid>
+            <Grid item xs={2}>
+              <div className={classes.search}>
+                <IconButton
+                  edge="start"
+                  color="inherit"
+                  aria-label="menu"
+                  onClick={handleToggleShowChat}
+                >
+                  <CloseIcon />
+                </IconButton>
+              </div>
+            </Grid>
+          </Grid>
+
           <Divider />
           <div className={classes.board}>
             <Scrollbars autoHide universal renderThumbVertical={ScrollVertical}>
-              {[...new Array(50)].map((e, k) => (
-                <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Dolore omnis harum esse iure totam deleniti? Nostrum,
-                  repellat, veritatis aut officia ipsam pariatur commodi natus
-                  blanditiis repellendus eaque distinctio, est dicta!
-                </p>
-              ))}
+              <div className={classes.chats}>
+                {users.map((u) => (
+                  <Chat user={u} />
+                ))}
+              </div>
             </Scrollbars>
           </div>
         </div>

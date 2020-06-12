@@ -1,7 +1,6 @@
 import { Notification, DateRange, AvailableTheme } from "./types";
 import { UserSession } from "models/users";
 
-
 export type AddTodoType = {
   column: any;
   todo: any;
@@ -142,22 +141,16 @@ export function ClsSession(): IAction {
 export function UpdateTodo(todo: any): IGenericAction {
   return {
     type: UPDATE_TODO,
-    payload: todo
+    payload: todo,
   };
 }
-
-
 
 export function AddTodo(todo: AddTodoType): IAddTodoAction {
   return {
     type: ADD_TODO,
-    payload: todo
+    payload: todo,
   };
 }
-
-
-
-
 
 // *****************
 // UNION TYPE ACTION
