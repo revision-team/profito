@@ -2,7 +2,6 @@ import React, { useContext, FunctionComponent } from "react";
 import { Store } from "store";
 import { ToggleShowChat, ClsSession } from "store/actions";
 
-import { MessageIcon } from "components/icons";
 import Menu from "components/navigation/menu";
 import Notifications from "components/navigation/notifications";
 import TrySession from "components/session/session";
