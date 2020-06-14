@@ -10,6 +10,7 @@ import SessionLayout from "layouts/session";
 import Loading from "components/loading";
 import Dashboard from "views/dashboard";
 
+const TermsAndPrivacy = lazy(() => import("views/home/information"));
 const Privacy = lazy(() => import("views/home/privacy"));
 const Terms = lazy(() => import("views/home/terms"));
 const Home = lazy(() => import("views/home"));
@@ -52,6 +53,7 @@ function HomeComponent() {
       <Route exact path="/" component={Home} />
       <Route exact path="/privacy" component={Privacy} />
       <Route exact path="/terms" component={Terms} />
+      <Route exact path="/information" component={TermsAndPrivacy} />
       <Redirect from="*" to="/" />
     </Switch>
   );
