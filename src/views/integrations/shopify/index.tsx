@@ -10,7 +10,6 @@ import {
   TableCell,
   Button,
   makeStyles,
-  Typography,
   Grid,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
@@ -83,7 +82,7 @@ export default function Sessions() {
   const { data, loading, error } = useQuery<SessionRequest>(
     GET_SHOPIFY_SESSIONS,
     {
-      variables: { active: false },
+      variables: { active: true },
     }
   );
 

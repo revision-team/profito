@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const GET_SHOPIFY_SESSIONS = gql`
-  query Sessions($active: Boolean) {
+  query Sessions($active: Boolean!) {
     sessions: oauth_sessions(source: "shopify", active: $active) {
       id: key
       role

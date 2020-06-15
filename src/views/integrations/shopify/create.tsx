@@ -20,7 +20,7 @@ function DataLink(props: { store: string }) {
 }
 
 export default function Create() {
-  const [store, setStore] = useState("stonesdev");
+  const [store, setStore] = useState("uprofitodev");
   const [connectStore, setConnectStore] = useState<string>();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
