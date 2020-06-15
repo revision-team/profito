@@ -1,9 +1,4 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import { useQuery } from "@apollo/client";
-import Form from "./_form";
-import { GET_SHOPIFY, SHOPIFY_EDIT, SHOPIFY_DESTROY } from "./queries";
-import { SessionRequest } from "..";
 
 export default function Edit() {
   // const { id } = useParams();

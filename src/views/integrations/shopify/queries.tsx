@@ -1,44 +1,17 @@
 import { gql } from "@apollo/client";
 
-export const GET_OAUTH_SESSIONS = gql`
-  query Shopify($source: String) {
-    sessions: oauth_sessions(source: $source) {
+export const GET_SHOPIFY_SESSIONS = gql`
+  query Sessions($active: Boolean) {
+    sessions: oauth_sessions(source: "shopify", active: $active) {
       id: key
       role
       description
       edges {
         session {
           id: key
+          description
         }
       }
-    }
-  }
-`;
-
-export const GET_SHOPIFY = gql`
-  query Shopify($id: String) {
-    shopify(id: $id) {
-      id
-      description
-      store
-    }
-  }
-`;
-
-export const SHOPIFY_EDIT = gql`
-  mutation UpdateShopify($id: String!, $description: String!) {
-    shopifiesEdit(id: $id, description: $description) {
-      id
-      description
-    }
-  }
-`;
-
-export const SHOPIFY_DESTROY = gql`
-  mutation DestroyShopify($id: String!) {
-    shopifiesDestroy(id: $id) {
-      id
-      description
     }
   }
 `;
