@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: "100%",
   },
   board: {
-    height: "calc(100% - 50px)",
+    height: "calc(100% - 100px)",
     width: "100%",
     marginTop: theme.spacing(2),
   },
@@ -117,7 +117,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: "center",
   },
   chats: {
-    marginRight: theme.spacing(3),
+    padding: theme.spacing(0, 0, 1, 1),
   },
 }));
 

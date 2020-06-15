@@ -8,17 +8,14 @@ export const Centered = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const Container = styled.div`
-  text-align: center;
-  width: 100%;
+export const CenteredHorizontal = styled.div`
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
 `;
 
-const Recipient = styled.div`
-  display: inline-block;
+export const CenteredVertical = styled.div`
+  position: relative;
+  top: 50%;
+  transform: translate(0, -50%);
 `;
-
-export const HorizontalCentered: FunctionComponent = (props) => (
-  <Container>
-    <Recipient>{props.children}</Recipient>
-  </Container>
-);

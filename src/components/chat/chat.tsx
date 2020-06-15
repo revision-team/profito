@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: 350,
     boxShadow: "none",
     transition: "opacity 0.2s linear",
+    backgroundColor: "transparent",
   },
   cardHeader: {
     padding: theme.spacing(1),

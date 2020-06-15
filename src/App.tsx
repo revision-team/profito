@@ -9,7 +9,10 @@ export default function App() {
 
   const muiTheme = createMuiTheme({
     ...theme,
-    palette: { type: state.theme },
+    palette: {
+      ...theme.palette,
+      type: state.theme,
+    },
   });
 
   return (

@@ -57,14 +57,15 @@ export default function SimpleMenu(props: MenuProps) {
   return (
     <div>
       <Button
-        aria-controls="simple-menu"
+        aria-controls="user-menu"
         aria-haspopup="true"
         onClick={handleClick}
+        color="inherit"
       >
         {props.user.name}
       </Button>
       <Menu
-        id="simple-menu"
+        id="user-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}

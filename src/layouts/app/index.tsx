@@ -31,11 +31,10 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flex: "1 1 auto",
-    overflow: "auto" /* for fixed side bar*/,
   },
   board: {
     width: "100%",
-    height: "calc(100% - 50px)",
+    height: "calc(100% - 65px)",
   },
   boardContent: {
     padding: theme.spacing(4),
